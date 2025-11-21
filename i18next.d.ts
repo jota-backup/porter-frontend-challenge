@@ -1,10 +1,10 @@
 import "i18next";
-import type translation from "./public/locales/pt/translation.json";
+import type messages from "./public/locales/pt/messages.json";
 
 declare module "i18next" {
   interface CustomTypeOptions {
     resources: {
-      translation: typeof translation;
+      messages: typeof messages;
     };
   }
 }
