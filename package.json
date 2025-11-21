@@ -15,6 +15,7 @@
 	},
 	"dependencies": {
 		"@apollo/client": "^4.0.9",
+		"@fontsource/inter": "^5.2.8",
 		"graphql": "^16.12.0",
 		"i18next": "^25.6.3",
 		"i18next-browser-languagedetector": "^8.2.0",

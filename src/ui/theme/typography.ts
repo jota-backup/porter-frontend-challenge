@@ -1,4 +1,6 @@
 export const typography = {
+	fontFamily: '"Inter", system-ui, -apple-system, sans-serif',
+
 	fontSize: {
 		xs: ["0.75rem", { lineHeight: "1rem" }], // 12px
 		sm: ["0.875rem", { lineHeight: "1.25rem" }], // 14px
