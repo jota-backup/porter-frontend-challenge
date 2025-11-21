@@ -1,12 +1,13 @@
 import { useTranslation } from "react-i18next";
+import { Layout } from "./ui/components/Layout";
 
 function App() {
 	const { t } = useTranslation();
 
 	return (
-		<div>
+		<Layout>
 			<h1>{t("hello")}</h1>
-		</div>
+		</Layout>
 	);
 }
 
