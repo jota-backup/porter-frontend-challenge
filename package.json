@@ -10,7 +10,8 @@
 		"format": "pnpm exec biome format --write",
 		"lint": "pnpm exec biome lint --write",
 		"check": "pnpm exec biome check --write",
-		"prepare": "husky"
+		"prepare": "husky",
+		"codegen": "graphql-codegen --config codegen.ts"
 	},
 	"dependencies": {
 		"@apollo/client": "^4.0.9",
@@ -27,6 +28,9 @@
 		"@biomejs/biome": "2.3.6",
 		"@commitlint/cli": "^20.1.0",
 		"@commitlint/config-conventional": "^20.0.0",
+		"@graphql-codegen/cli": "^6.1.0",
+		"@graphql-codegen/typescript": "^5.0.5",
+		"@graphql-codegen/typescript-operations": "^5.0.5",
 		"@types/node": "^24.10.1",
 		"@types/react": "^19.2.5",
 		"@types/react-dom": "^19.2.3",

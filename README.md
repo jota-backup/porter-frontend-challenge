@@ -20,6 +20,7 @@ Neste último final de semana participei do Front in Floripa e curti a proposta 
 > 20/11 (~20h30): Para a implementação do Docker, resolvi adotar as boas práticas de ter um processo multistep para instalar dependências + buildar a aplicação e, a partir dos arquivos gerados em /dist, servir a aplicação através de uma imagem NGINX. Já em termos de i18n, implementei a ferramenta seguindo a documentação da mesma e mantendo defaults (como namespace). Adicionei também um arquivo de declaração de tipos para utilizar somente mensagens existentes, assim melhorando a DX com Typescript.
 > 20/11 (21h): Vou utilizar a ferramenta UXPilot para gerar um design referência para essa entrega. Vou adicionar na pasta /docs depois o prompt usado e prints contendo os resultados.
 > 21/11 (12h): Agora vou focar na parte que acredito que pode demorar um pouco mais de tempo: configurar o Apollo Client e garantir o consumo dos dados que vou precisar, conforme orientação dada pelo PDF do desafio + design de referência.
+> 21/11 (13h30): Passei a última hora e meia lendo a documentação do Apollo Client. Gostei muito do que li sobre o uso de Suspense e maneiras de manipular o carregamento de queries - pretendo usar isso para fazer certas otimizações. Mas a cereja do bolo foi descobrir a existência do GraphQL Codegen. Fiz alguns testes e, pelo visto, ele é compatível com os schemas disponibilizados pela API do Rick and Morty. Vou investir um tempo nisso já que um dos critérios do desafio é o uso bem feito de TS.
 
 ## Decisões técnicas
 
