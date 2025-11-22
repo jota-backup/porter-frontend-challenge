@@ -1,6 +1,8 @@
 import { useSuspenseQuery } from "@apollo/client/react";
 import { useState } from "react";
+import { useDebounce } from "use-debounce";
 import { GET_CHARACTERS } from "../graphql/queries/getCharacters";
+import { useFilterStore } from "../store/useFilterStore";
 import type {
 	GetCharactersQuery,
 	GetCharactersQueryVariables,
@@ -8,6 +10,8 @@ import type {
 
 export const useCharacters = (variables?: GetCharactersQueryVariables) => {
 	const [currentPage, setCurrentPage] = useState(1);
+	const { searchName } = useFilterStore();
+	const [debouncedSearchName] = useDebounce(searchName, 500);
 
 	const { data } = useSuspenseQuery<
 		GetCharactersQuery,
@@ -15,6 +19,7 @@ export const useCharacters = (variables?: GetCharactersQueryVariables) => {
 	>(GET_CHARACTERS, {
 		variables: {
 			...variables,
+			name: debouncedSearchName || undefined,
 			page: currentPage,
 		},
 	});
