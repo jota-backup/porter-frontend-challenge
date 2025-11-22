@@ -22,6 +22,7 @@ Neste último final de semana participei do Front in Floripa e curti a proposta 
 > 21/11 (12h): Agora vou focar na parte que acredito que pode demorar um pouco mais de tempo: configurar o Apollo Client e garantir o consumo dos dados que vou precisar, conforme orientação dada pelo PDF do desafio + design de referência.
 > 21/11 (13h30): Passei a última hora e meia lendo a documentação do Apollo Client. Gostei muito do que li sobre o uso de Suspense e maneiras de manipular o carregamento de queries - pretendo usar isso para fazer certas otimizações. Mas a cereja do bolo foi descobrir a existência do GraphQL Codegen. Fiz alguns testes e, pelo visto, ele é compatível com os schemas disponibilizados pela API do Rick and Morty. Vou investir um tempo nisso já que um dos critérios do desafio é o uso bem feito de TS.
 > 21/11 (17h): Com algumas pausas e leituras de documentação, fiz o setup do Styled Components junto de um tema base para a aplicação. Agora é hora de começar a dar vida a UI, já que já consigo consumir a API do GraphQL. 
+> 22/11 (09h): Ontem, explorei ideias de implementação, testando queries e formas de montar a página. Depois dessa exploração, deletei quase todos os arquivos e agora pretendo começar a fazer a construção da página de baixo para cima - vou começar fazendo renderizar os cards dos personagens, e depois avanço para a parte dos filtros.
 
 ## Decisões técnicas
 
