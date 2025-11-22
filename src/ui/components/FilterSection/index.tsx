@@ -1,7 +1,7 @@
 import { Heart, Search, Users } from "lucide-react";
-import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import styled from "styled-components";
+import { useFilterStore } from "../../../store/useFilterStore";
 
 const Container = styled.div`
 	display: flex;
@@ -95,7 +95,8 @@ const ToggleButton = styled.button<{ $active: boolean }>`
 
 export const FilterSection = () => {
 	const { t } = useTranslation();
-	const [activeFilter, setActiveFilter] = useState<"all" | "favorites">("all");
+	const { searchName, activeFilter, setSearchName, setActiveFilter } =
+		useFilterStore();
 
 	return (
 		<Container>
@@ -104,6 +105,8 @@ export const FilterSection = () => {
 				<SearchInput
 					type="text"
 					placeholder={t("dashboard.filter.searchPlaceholder")}
+					value={searchName}
+					onChange={(e) => setSearchName(e.target.value)}
 				/>
 			</SearchInputWrapper>
 
