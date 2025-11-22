@@ -30,6 +30,8 @@ Neste último final de semana participei do Front in Floripa e curti a proposta 
 
 - Utilizar a API Suspense do React para garantir uma boa UX. Durante o primeiro carregamento, temos um spinner que preenche a tela enquanto carregam-se os dados. Após, durante o uso da paginação, utilizamos a API do useTransition para manter a tela funcional enquanto os dados não foram carregados - temos um spinner junto ao botão de paginação para indicar que novos dados estão sendo carregados e, enquanto isso, os cards da página "antiga" seguem presentes.
 - Utilizar Debounce para evitar sobrecarga de requisições e prejudicar a UX quando pesquisar personagem por nome.
+- Utilizar Map dentro da Store de favoritos para persistir cada personagem indexado a partir de seu ID. Isso torna operações de acesso, adição e deleção mais simples.
+- Salvar o timestamp do momento em que se favoritou um personagem para permitir implementações futuras de reconciliação/refetch com a API externa.
 
 ### Sobre as Ferramentas e tecnologias:
 
