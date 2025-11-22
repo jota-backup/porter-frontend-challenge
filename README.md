@@ -24,10 +24,12 @@ Neste último final de semana participei do Front in Floripa e curti a proposta 
 > 21/11 (17h): Com algumas pausas e leituras de documentação, fiz o setup do Styled Components junto de um tema base para a aplicação. Agora é hora de começar a dar vida a UI, já que já consigo consumir a API do GraphQL. 
 > 22/11 (09h): Ontem, explorei ideias de implementação, testando queries e formas de montar a página. Depois dessa exploração, deletei quase todos os arquivos e agora pretendo começar a fazer a construção da página de baixo para cima - vou começar fazendo renderizar os cards dos personagens, e depois avanço para a parte dos filtros.
 > 22/11 (16h): Implementei o primeiro grupo de requisitos que é a tela de usuários. Gastei um tempo para adicionar transições, refatorar para utilizar o useSuspenseQuery e garantir uma boa UX. Agora, pretendo implementar os filtros de maneira crua, sem funcionalidade, depois instalar o Zustand e configurar a store para salvar o estado dos filtros e torná-los funcionais.
+> 22/11 (18h30): Store de filtros criadas e input de pesquisa por nome já operando. O foco agora é construir a funcionalidade de favoritos. Vou deixar o modal de detalhes do personagem pro fim já que deve ser uma parte mais tranquila.
 
 ## Decisões técnicas
 
 - Utilizar a API Suspense do React para garantir uma boa UX. Durante o primeiro carregamento, temos um spinner que preenche a tela enquanto carregam-se os dados. Após, durante o uso da paginação, utilizamos a API do useTransition para manter a tela funcional enquanto os dados não foram carregados - temos um spinner junto ao botão de paginação para indicar que novos dados estão sendo carregados e, enquanto isso, os cards da página "antiga" seguem presentes.
+- Utilizar Debounce para evitar sobrecarga de requisições e prejudicar a UX quando pesquisar personagem por nome.
 
 ### Sobre as Ferramentas e tecnologias:
 
