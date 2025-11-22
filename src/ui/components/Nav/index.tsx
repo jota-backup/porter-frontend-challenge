@@ -1,6 +1,7 @@
-import { Users } from "lucide-react";
+import { Languages, Users } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import styled from "styled-components";
+import { AVAILABLE_LOCALES } from "../../../i18n/locales";
 
 const NavContainer = styled.nav`
 	display: flex;
@@ -78,8 +79,49 @@ const NavLink = styled.a<{ $active?: boolean }>`
 	`}
 `;
 
+const LanguageSelectWrapper = styled.div`
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
+	position: relative;
+`;
+
+const LanguageSelect = styled.select`
+	padding: 0.5rem 1rem 0.5rem 2.5rem;
+	background-color: ${({ theme }) => theme.colors.background.secondary};
+	border: 1px solid ${({ theme }) => theme.colors.border.default};
+	border-radius: 0.5rem;
+	color: ${({ theme }) => theme.colors.text.primary};
+	font-size: 0.875rem;
+	font-weight: 500;
+	cursor: pointer;
+	transition: all 0.2s ease;
+	appearance: none;
+
+	&:hover {
+		background-color: ${({ theme }) => theme.colors.background.primary};
+		border-color: ${({ theme }) => theme.colors.primary.default};
+	}
+
+	&:focus {
+		outline: none;
+		border-color: ${({ theme }) => theme.colors.primary.default};
+	}
+`;
+
+const LanguageIcon = styled(Languages)`
+	position: absolute;
+	left: 0.875rem;
+	pointer-events: none;
+	color: ${({ theme }) => theme.colors.text.secondary};
+`;
+
 export const Nav = () => {
-	const { t } = useTranslation();
+	const { t, i18n } = useTranslation();
+
+	const handleLanguageChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+		i18n.changeLanguage(e.target.value);
+	};
 
 	return (
 		<NavContainer>
@@ -94,6 +136,18 @@ export const Nav = () => {
 					<NavLink href="#" $active={true}>
 						{t("nav.allChars")}
 					</NavLink>
+				</NavItem>
+				<NavItem>
+					<LanguageSelectWrapper>
+						<LanguageIcon size={16} />
+						<LanguageSelect value={i18n.language} onChange={handleLanguageChange}>
+							{AVAILABLE_LOCALES.map((locale) => (
+								<option key={locale.code} value={locale.code}>
+									{locale.flag} {locale.name}
+								</option>
+							))}
+						</LanguageSelect>
+					</LanguageSelectWrapper>
 				</NavItem>
 			</NavList>
 		</NavContainer>

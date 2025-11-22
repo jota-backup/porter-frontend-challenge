@@ -1,0 +1,35 @@
+{
+	"nav": {
+		"brandName": "CharHub",
+		"allChars": "Dashboard"
+	},
+	"dashboard": {
+		"heading": {
+			"title": "Discover your favorite characters",
+			"subtitle": "Browse through our collection of amazing characters"
+		},
+		"characterCard": {
+			"unknownOrigin": "Unknown origin",
+			"unknownName": "Unknown",
+			"unknownStatus": "Unknown"
+		},
+		"characterList": {
+			"loading": "Loading characters...",
+			"error": "Error loading characters. Please try again.",
+			"empty": "No characters found"
+		},
+		"pagination": {
+			"previous": "Previous",
+			"next": "Next"
+		},
+		"error": {
+			"title": "Error loading characters",
+			"message": "An error occurred while loading the data. Please try again later."
+		},
+		"filter": {
+			"searchPlaceholder": "Search characters by name...",
+			"allUsers": "All",
+			"favorites": "Favorites"
+		}
+	}
+}
