@@ -13,8 +13,13 @@ export const useCharacters = (variables?: GetCharactersQueryVariables) => {
 		variables,
 	});
 
+	const results = data?.characters?.results ?? [];
+
+	// Filter out completely null entries from the array. This is necessary to achieve type safety given the nullable properties coming from the API Schema that we leverage to generate our types with Codegen.
+	const characters = results.filter((character) => character !== null);
+
 	return {
-		characters: data?.characters?.results ?? [],
+		characters,
 		loading,
 		error,
 	};

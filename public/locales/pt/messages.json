@@ -1,13 +1,23 @@
 {
 	"hello": "world",
 	"nav": {
-		"brandName": "UserHub",
-		"allUsers": "Todos os Usuários"
+		"brandName": "CharHub",
+		"allChars": "Todos os personagens"
 	},
 	"dashboard": {
 		"heading": {
-			"title": "Descubra seus usuários favoritos",
+			"title": "Descubra seus personagens favoritos",
 			"subtitle": "Navegue por nossa coleção de personagens incríveis"
+		},
+		"characterCard": {
+			"unknownOrigin": "Origem desconhecida",
+			"unknownName": "Desconhecido",
+			"unknownStatus": "Desconhecido"
+		},
+		"characterList": {
+			"loading": "Carregando personagens...",
+			"error": "Erro ao carregar personagens. Tente novamente.",
+			"empty": "Nenhum personagem encontrado"
 		}
 	}
 }

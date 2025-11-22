@@ -1,6 +1,6 @@
-import styled from "styled-components";
 import { Users } from "lucide-react";
 import { useTranslation } from "react-i18next";
+import styled from "styled-components";
 
 const NavContainer = styled.nav`
 	display: flex;
@@ -92,7 +92,7 @@ export const Nav = () => {
 			<NavList>
 				<NavItem>
 					<NavLink href="#" $active={true}>
-						{t("nav.allUsers")}
+						{t("nav.allChars")}
 					</NavLink>
 				</NavItem>
 			</NavList>

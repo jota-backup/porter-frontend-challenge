@@ -5,6 +5,7 @@ export const BASE_CHARACTER_FRAGMENT = gql`
 		id
 		name
 		status
+		image
 		origin {
 			name
 		}
