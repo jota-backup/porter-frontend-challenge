@@ -18,6 +18,14 @@
 			"loading": "Carregando personagens...",
 			"error": "Erro ao carregar personagens. Tente novamente.",
 			"empty": "Nenhum personagem encontrado"
+		},
+		"pagination": {
+			"previous": "Anterior",
+			"next": "Próximo"
+		},
+		"error": {
+			"title": "Erro ao carregar personagens",
+			"message": "Ocorreu um erro ao carregar os dados. Tente novamente mais tarde."
 		}
 	}
 }
