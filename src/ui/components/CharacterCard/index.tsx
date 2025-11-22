@@ -1,7 +1,7 @@
 import { Heart } from "lucide-react";
-import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import styled from "styled-components";
+import { useFavoritesStore } from "../../../store/useFavoritesStore";
 import type { BaseCharacterFragment } from "../../../types/__generated__/graphql";
 
 interface CharacterCardProps {
@@ -104,10 +104,18 @@ const Origin = styled.p`
 
 export const CharacterCard = ({ character }: CharacterCardProps) => {
 	const { t } = useTranslation();
-	const [isFavorite, setIsFavorite] = useState(false);
+	const { isFavorite, addFavorite, removeFavorite } = useFavoritesStore();
+
+	const isCharacterFavorite = character.id ? isFavorite(character.id) : false;
 
 	const toggleFavorite = () => {
-		setIsFavorite(!isFavorite);
+		if (!character.id) return;
+
+		if (isCharacterFavorite) {
+			removeFavorite(character.id);
+		} else {
+			addFavorite(character);
+		}
 	};
 
 	const name = character.name ?? t("dashboard.characterCard.unknownName");
@@ -122,7 +130,7 @@ export const CharacterCard = ({ character }: CharacterCardProps) => {
 					<Heart
 						size={20}
 						color="#EF4444"
-						fill={isFavorite ? "#EF4444" : "none"}
+						fill={isCharacterFavorite ? "#EF4444" : "none"}
 					/>
 				</HeartButton>
 				<StatusBadge $status={status}>{status}</StatusBadge>
