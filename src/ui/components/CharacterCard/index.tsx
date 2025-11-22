@@ -12,11 +12,10 @@ const Card = styled.div`
 	background-color: ${({ theme }) => theme.colors.background.primary};
 	border-radius: 0.75rem;
 	box-shadow: ${({ theme }) => theme.shadows.sm};
-	transition: transform 0.2s ease, box-shadow 0.2s ease;
+	transition: box-shadow 0.2s ease;
 	padding: 1.25rem;
 
 	&:hover {
-		transform: translateY(-4px);
 		box-shadow: ${({ theme }) => theme.shadows.md};
 	}
 `;
