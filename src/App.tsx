@@ -1,4 +1,5 @@
 import { Suspense } from "react";
+import { Toaster } from "react-hot-toast";
 import { useFilterStore } from "./store/useFilterStore";
 import { AllCharactersContainer } from "./ui/components/AllCharactersContainer";
 import { ErrorBoundary } from "./ui/components/ErrorBoundary";
@@ -12,19 +13,22 @@ function App() {
 	const { activeFilter } = useFilterStore();
 
 	return (
-		<Layout>
-			<Heading />
-			<FilterSection />
-			<ErrorBoundary>
-				{activeFilter === "all" ? (
-					<Suspense fallback={<Spinner />}>
-						<AllCharactersContainer />
-					</Suspense>
-				) : (
-					<FavoritesContainer />
-				)}
-			</ErrorBoundary>
-		</Layout>
+		<>
+			<Toaster position="bottom-right" />
+			<Layout>
+				<Heading />
+				<FilterSection />
+				<ErrorBoundary>
+					{activeFilter === "all" ? (
+						<Suspense fallback={<Spinner />}>
+							<AllCharactersContainer />
+						</Suspense>
+					) : (
+						<FavoritesContainer />
+					)}
+				</ErrorBoundary>
+			</Layout>
+		</>
 	);
 }
 
