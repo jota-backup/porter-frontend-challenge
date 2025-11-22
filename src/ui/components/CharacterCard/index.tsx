@@ -1,4 +1,4 @@
-import { Heart } from "lucide-react";
+import { Heart, MapPin } from "lucide-react";
 import toast from "react-hot-toast";
 import { useTranslation } from "react-i18next";
 import styled from "styled-components";
@@ -95,12 +95,19 @@ const Name = styled.h3`
 `;
 
 const Origin = styled.p`
+	display: flex;
+	align-items: center;
+	gap: 0.375rem;
 	font-size: ${({ theme }) => theme.typography.fontSize.xs};
 	color: ${({ theme }) => theme.colors.text.secondary};
 	margin: 0;
 	overflow: hidden;
 	text-overflow: ellipsis;
 	white-space: nowrap;
+
+	svg {
+		flex-shrink: 0;
+	}
 `;
 
 export const CharacterCard = ({ character }: CharacterCardProps) => {
@@ -143,6 +150,7 @@ export const CharacterCard = ({ character }: CharacterCardProps) => {
 			<Content>
 				<Name>{name}</Name>
 				<Origin>
+					<MapPin size={14} />
 					{character.origin?.name || t("dashboard.characterCard.unknownOrigin")}
 				</Origin>
 			</Content>
