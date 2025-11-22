@@ -3,5 +3,11 @@
 	"nav": {
 		"brandName": "UserHub",
 		"allUsers": "Todos os Usuários"
+	},
+	"dashboard": {
+		"heading": {
+			"title": "Descubra seus usuários favoritos",
+			"subtitle": "Navegue por nossa coleção de personagens incríveis"
+		}
 	}
 }
