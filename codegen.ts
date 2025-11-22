@@ -3,7 +3,7 @@ import { CodegenConfig } from "@graphql-codegen/cli";
 const config: CodegenConfig = {
 	overwrite: true,
 	schema: "https://rickandmortyapi.com/graphql",
-	documents: ["src/graphql/*.{ts,tsx}"],
+	documents: ["src/graphql/**/*.{ts,tsx}"],
 	ignoreNoDocuments: true,
 	generates: {
 		"./src/types/__generated__/graphql.ts": {
