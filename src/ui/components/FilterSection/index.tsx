@@ -82,9 +82,7 @@ const ToggleButton = styled.button<{ $active: boolean }>`
 
 	&:hover {
 		background-color: ${({ theme, $active }) =>
-			$active
-				? theme.colors.primary.dark
-				: theme.colors.background.secondary};
+			$active ? theme.colors.primary.dark : theme.colors.background.secondary};
 	}
 
 	svg {

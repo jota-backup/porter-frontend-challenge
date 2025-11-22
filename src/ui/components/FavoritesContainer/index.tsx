@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { useFilterStore } from "../../../store/useFilterStore";
 import { useFavoritesStore } from "../../../store/useFavoritesStore";
+import { useFilterStore } from "../../../store/useFilterStore";
 import { CharacterListView } from "../CharacterListView";
 
 const ITEMS_PER_PAGE = 20;

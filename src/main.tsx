@@ -10,8 +10,8 @@ import "./ui/reset.css";
 import { ApolloClient, HttpLink, InMemoryCache } from "@apollo/client";
 import { ApolloProvider } from "@apollo/client/react";
 import { ThemeProvider } from "styled-components";
-import { theme } from "./ui/theme/index.ts";
 import { GlobalStyles } from "./ui/theme/globalStyles.ts";
+import { theme } from "./ui/theme/index.ts";
 
 const client = new ApolloClient({
 	link: new HttpLink({ uri: import.meta.env.VITE_RICK_MORTY_GRAPHQL_API_URL }),
