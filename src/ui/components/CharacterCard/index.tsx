@@ -4,6 +4,7 @@ import styled from "styled-components";
 import { useFavorite } from "../../../hooks/useFavorite";
 import { useModalStore } from "../../../store/useModalStore";
 import type { BaseCharacterFragment } from "../../../types/__generated__/graphql";
+import { StatusBadge } from "../StatusBadge";
 
 interface CharacterCardProps {
 	character: BaseCharacterFragment;
@@ -65,26 +66,10 @@ const HeartButton = styled.button`
 	}
 `;
 
-const StatusBadge = styled.span<{ $status: string }>`
+const PositionedStatusBadge = styled(StatusBadge)`
 	position: absolute;
 	bottom: 0.75rem;
 	left: 0.75rem;
-	padding: 0.25rem 0.75rem;
-	border-radius: 0.375rem;
-	font-size: ${({ theme }) => theme.typography.fontSize.xs};
-	font-weight: ${({ theme }) => theme.typography.fontWeight.semibold};
-	background-color: ${({ theme, $status }) => {
-		switch ($status.toLowerCase()) {
-			case "alive":
-				return theme.colors.success;
-			case "dead":
-				return theme.colors.error;
-			default:
-				return theme.colors.gray[500];
-		}
-	}};
-	color: ${({ theme }) => theme.colors.text.inverse};
-	text-transform: capitalize;
 `;
 
 const Content = styled.div`
@@ -157,7 +142,7 @@ export const CharacterCard = ({ character }: CharacterCardProps) => {
 						fill={isCharacterFavorite ? "#EF4444" : "none"}
 					/>
 				</HeartButton>
-				<StatusBadge $status={status}>{status}</StatusBadge>
+				<PositionedStatusBadge status={status} />
 			</ImageContainer>
 			<Content>
 				<Name>{name}</Name>

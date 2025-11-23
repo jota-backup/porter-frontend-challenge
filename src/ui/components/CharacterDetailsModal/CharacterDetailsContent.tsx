@@ -10,6 +10,7 @@ import type {
 	GetCharacterDetailsQueryVariables,
 } from "../../../types/__generated__/graphql";
 import { Spinner } from "../Spinner";
+import { StatusBadge } from "../StatusBadge";
 
 interface CharacterDetailsContentProps {
 	characterId: string;
@@ -52,24 +53,11 @@ const BadgeGroup = styled.div`
 	gap: 0.5rem;
 `;
 
-const StatusBadge = styled.span<{ $status: string }>`
+const StyledStatusBadge = styled(StatusBadge)`
 	display: inline-block;
 	padding: 0.375rem 0.875rem;
 	border-radius: 0.5rem;
 	font-size: ${({ theme }) => theme.typography.fontSize.sm};
-	font-weight: ${({ theme }) => theme.typography.fontWeight.semibold};
-	background-color: ${({ theme, $status }) => {
-		switch ($status.toLowerCase()) {
-			case "alive":
-				return theme.colors.success;
-			case "dead":
-				return theme.colors.error;
-			default:
-				return theme.colors.gray[500];
-		}
-	}};
-	color: ${({ theme }) => theme.colors.text.inverse};
-	text-transform: capitalize;
 `;
 
 const SpeciesText = styled.span`
@@ -247,7 +235,7 @@ export const CharacterDetailsContent = ({
 				<ImageOverlay>
 					<Name id="character-name">{name}</Name>
 					<BadgeGroup>
-						<StatusBadge $status={status}>{status}</StatusBadge>
+						<StyledStatusBadge status={status} />
 						<SpeciesText>{species}</SpeciesText>
 					</BadgeGroup>
 				</ImageOverlay>
