@@ -1,7 +1,7 @@
 import { Heart, MapPin } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import styled, { useTheme } from "styled-components";
-import { useFavorite } from "../../../hooks/useFavorite";
+import { useFavoritesStore } from "../../../store/useFavoritesStore";
 import { useModalStore } from "../../../store/useModalStore";
 import type { BaseCharacterFragment } from "../../../types/__generated__/graphql";
 import { StatusBadge } from "../StatusBadge";
@@ -106,8 +106,24 @@ export const CharacterCard = ({ character }: CharacterCardProps) => {
 	const { t } = useTranslation();
 	const theme = useTheme();
 	const { openCharacterModal } = useModalStore();
-	const { isFavorite: isCharacterFavorite, toggleFavorite } =
-		useFavorite(character);
+
+	const isCharacterFavorite = useFavoritesStore((state) =>
+		character?.id ? state.favorites.has(character.id) : false,
+	);
+
+	const addFavorite = useFavoritesStore((state) => state.addFavorite);
+	const removeFavorite = useFavoritesStore((state) => state.removeFavorite);
+
+	const toggleFavorite = (e: React.MouseEvent) => {
+		e.stopPropagation();
+		if (!character.id) return;
+
+		if (isCharacterFavorite) {
+			removeFavorite(character.id);
+		} else {
+			addFavorite(character);
+		}
+	};
 
 	const handleCardClick = () => {
 		if (character.id) {
