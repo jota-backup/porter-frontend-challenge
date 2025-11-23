@@ -3,7 +3,7 @@ import { Dna, Globe, MapPin, User2 } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import styled from "styled-components";
 import { GET_CHARACTER_DETAILS } from "../../../graphql/queries/getCharacterDetails";
-import { useFavoritesStore } from "../../../store/useFavoritesStore";
+import { useFavoriteCharacter } from "../../../hooks/useFavoriteCharacter";
 import type {
 	BaseCharacterFragment,
 	GetCharacterDetailsQuery,
@@ -45,24 +45,13 @@ export const CharacterDetailsContent = ({
 
 	const character = data?.character;
 
-	const isCharacterFavorite = useFavoritesStore((state) =>
-		character?.id ? state.favorites.has(character.id) : false,
-	);
+	const { isCharacterFavorite, toggleFavorite } = useFavoriteCharacter({
+		character: character as BaseCharacterFragment,
+	});
 
-	const addFavorite = useFavoritesStore((state) => state.addFavorite);
-	const removeFavorite = useFavoritesStore((state) => state.removeFavorite);
-
-	const toggleFavorite = () => {
-		if (!character?.id) return;
-
-		if (isCharacterFavorite) {
-			removeFavorite(character.id);
-		} else {
-			addFavorite(character as BaseCharacterFragment);
-		}
-	};
-
-	if (!character) return null;
+	if (!character) {
+		return null;
+	}
 
 	const name = character.name ?? t("dashboard.characterCard.unknownName");
 	const status = character.status ?? t("dashboard.characterCard.unknownStatus");
