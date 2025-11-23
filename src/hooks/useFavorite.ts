@@ -3,9 +3,15 @@ import { useTranslation } from "react-i18next";
 import { useFavoritesStore } from "../store/useFavoritesStore";
 import type { BaseCharacterFragment } from "../types/__generated__/graphql";
 
+interface UseFavoriteOptions {
+	silent?: boolean;
+}
+
 export const useFavorite = (
 	character: BaseCharacterFragment | null | undefined,
+	options: UseFavoriteOptions = {},
 ) => {
+	const { silent = false } = options;
 	const { isFavorite, addFavorite, removeFavorite } = useFavoritesStore();
 	const { t } = useTranslation();
 
@@ -21,10 +27,14 @@ export const useFavorite = (
 
 		if (isCharacterFavorite) {
 			removeFavorite(character.id);
-			toast.success(`${characterName} removed from favorites`);
+			if (!silent) {
+				toast.success(`${characterName} removed from favorites`);
+			}
 		} else {
 			addFavorite(character);
-			toast.success(`${characterName} added to favorites`);
+			if (!silent) {
+				toast.success(`${characterName} added to favorites`);
+			}
 		}
 	};
 

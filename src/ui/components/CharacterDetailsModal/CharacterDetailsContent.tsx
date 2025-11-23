@@ -2,8 +2,8 @@ import { useSuspenseQuery } from "@apollo/client/react";
 import { Dna, Globe, Heart, MapPin, Monitor, User2 } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import styled from "styled-components";
-import { useFavorite } from "../../../hooks/useFavorite";
 import { GET_CHARACTER_DETAILS } from "../../../graphql/queries/getCharacterDetails";
+import { useFavorite } from "../../../hooks/useFavorite";
 import type {
 	BaseCharacterFragment,
 	GetCharacterDetailsQuery,
@@ -215,6 +215,7 @@ export const CharacterDetailsContent = ({
 	const character = data?.character;
 	const { isFavorite: isCharacterFavorite, toggleFavorite } = useFavorite(
 		character as BaseCharacterFragment | null | undefined,
+		{ silent: true },
 	);
 
 	if (!character) return null;
