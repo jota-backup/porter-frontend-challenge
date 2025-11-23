@@ -1,5 +1,6 @@
 import { X } from "lucide-react";
 import { Suspense, useEffect, useRef } from "react";
+import { useTranslation } from "react-i18next";
 import styled from "styled-components";
 import { useModalStore } from "../../../store/useModalStore";
 import { ErrorBoundary } from "../ErrorBoundary";
@@ -55,6 +56,7 @@ const CloseButton = styled.button`
 `;
 
 export const CharacterDetailsModal = () => {
+	const { t } = useTranslation();
 	const { isModalOpen, selectedCharacterId, closeModal } = useModalStore();
 	const dialogRef = useRef<HTMLDialogElement>(null);
 
@@ -95,7 +97,7 @@ export const CharacterDetailsModal = () => {
 			onClick={handleBackdropClick}
 			aria-labelledby="character-name"
 		>
-			<CloseButton onClick={closeModal} aria-label="Close modal">
+			<CloseButton onClick={closeModal} aria-label={t("dashboard.characterModal.closeModal")}>
 				<X size={20} />
 			</CloseButton>
 

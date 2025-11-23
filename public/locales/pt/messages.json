@@ -15,7 +15,8 @@
 			"addToFavorites": "Adicionar {{name}} aos favoritos",
 			"removeFromFavorites": "Remover {{name}} dos favoritos",
 			"addedToFavorites": "{{name}} adicionado aos favoritos",
-			"removedFromFavorites": "{{name}} removido dos favoritos"
+			"removedFromFavorites": "{{name}} removido dos favoritos",
+			"viewDetails": "Ver detalhes de {{name}}"
 		},
 		"characterModal": {
 			"species": "Espécie",
@@ -25,7 +26,8 @@
 			"featuredIn": "Aparece em",
 			"episode": "Episódio",
 			"episodes": "Episódios",
-			"viewEpisodes": "Ver Episódios"
+			"viewEpisodes": "Ver Episódios",
+			"closeModal": "Fechar modal"
 		},
 		"characterList": {
 			"loading": "Carregando personagens...",

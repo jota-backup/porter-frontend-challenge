@@ -142,7 +142,7 @@ export const CharacterCard = ({ character }: CharacterCardProps) => {
 			tabIndex={0}
 			onClick={handleCardClick}
 			onKeyDown={handleKeyDown}
-			aria-label={`View details for ${name}`}
+			aria-label={t("dashboard.characterCard.viewDetails", { name })}
 		>
 			<ImageContainer>
 				<Image src={image} alt={name} />

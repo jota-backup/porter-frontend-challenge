@@ -1,5 +1,6 @@
 import { Heart } from "lucide-react";
 import type { ReactNode } from "react";
+import { useTranslation } from "react-i18next";
 import styled, { useTheme } from "styled-components";
 import { StatusBadge } from "../StatusBadge";
 
@@ -95,6 +96,7 @@ export const CharacterHeader = ({
 	isFavorite,
 	onToggleFavorite,
 }: CharacterHeaderProps) => {
+	const { t } = useTranslation();
 	const theme = useTheme();
 
 	return (
@@ -104,7 +106,9 @@ export const CharacterHeader = ({
 				type="button"
 				onClick={onToggleFavorite}
 				aria-label={
-					isFavorite ? `Remove ${name} from favorites` : `Add ${name} to favorites`
+					isFavorite
+						? t("dashboard.characterCard.removeFromFavorites", { name })
+						: t("dashboard.characterCard.addToFavorites", { name })
 				}
 			>
 				<Heart
