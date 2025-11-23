@@ -1,8 +1,7 @@
 import { Heart, MapPin } from "lucide-react";
-import toast from "react-hot-toast";
 import { useTranslation } from "react-i18next";
 import styled from "styled-components";
-import { useFavoritesStore } from "../../../store/useFavoritesStore";
+import { useFavorite } from "../../../hooks/useFavorite";
 import { useModalStore } from "../../../store/useModalStore";
 import type { BaseCharacterFragment } from "../../../types/__generated__/graphql";
 
@@ -120,10 +119,9 @@ const Origin = styled.p`
 
 export const CharacterCard = ({ character }: CharacterCardProps) => {
 	const { t } = useTranslation();
-	const { isFavorite, addFavorite, removeFavorite } = useFavoritesStore();
 	const { openCharacterModal } = useModalStore();
-
-	const isCharacterFavorite = character.id ? isFavorite(character.id) : false;
+	const { isFavorite: isCharacterFavorite, toggleFavorite } =
+		useFavorite(character);
 
 	const handleCardClick = () => {
 		if (character.id) {
@@ -135,23 +133,6 @@ export const CharacterCard = ({ character }: CharacterCardProps) => {
 		if (e.key === "Enter" || e.key === " ") {
 			e.preventDefault();
 			handleCardClick();
-		}
-	};
-
-	const handleFavoriteClick = (e: React.MouseEvent) => {
-		e.stopPropagation();
-
-		if (!character.id) return;
-
-		const characterName =
-			character.name || t("dashboard.characterCard.unknownName");
-
-		if (isCharacterFavorite) {
-			removeFavorite(character.id);
-			toast.success(`${characterName} removed from favorites`);
-		} else {
-			addFavorite(character);
-			toast.success(`${characterName} added to favorites`);
 		}
 	};
 
@@ -169,7 +150,7 @@ export const CharacterCard = ({ character }: CharacterCardProps) => {
 		>
 			<ImageContainer>
 				<Image src={image} alt={name} />
-				<HeartButton type="button" onClick={handleFavoriteClick}>
+				<HeartButton type="button" onClick={toggleFavorite}>
 					<Heart
 						size={20}
 						color="#EF4444"
