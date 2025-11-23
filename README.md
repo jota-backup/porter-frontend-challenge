@@ -26,6 +26,7 @@ Neste último final de semana participei do Front in Floripa e curti a proposta 
 > 22/11 (16h): Implementei o primeiro grupo de requisitos que é a tela de usuários. Gastei um tempo para adicionar transições, refatorar para utilizar o useSuspenseQuery e garantir uma boa UX. Agora, pretendo implementar os filtros de maneira crua, sem funcionalidade, depois instalar o Zustand e configurar a store para salvar o estado dos filtros e torná-los funcionais.
 > 22/11 (18h30): Store de filtros criadas e input de pesquisa por nome já operando. O foco agora é construir a funcionalidade de favoritos. Vou deixar o modal de detalhes do personagem pro fim já que deve ser uma parte mais tranquila.
 > 22/11 (20h): Criei a store de favoritos e enfrentei uma das maiores refatorações até aqui - separar a lógica de buscar os personagens da camada de apresentação para garantir um código DRY. Isso permitiu fazer uma renderização condicional a depender do filtro selecionado, buscar os dados necessários, e manter um lugar centralizado para a apresentação com uma única instanciação de paginação, cards e grid (critério de reutilização de componentes). Também adicionei um toast para atender o requisito do desafio de feedback ao usuário.
+> 23/11 (15h): Implementei o modal de detalhes do usuário. Essa parte já foi bem mais intuitiva. Implementei um Error Boundary nele também para, em caso de erro das requests, mostrar um erro ao usuário sem impedir que ele continue usando a aplicação que já havia carregado. Adotei o uso da Suspense query com retorno de dados parciais em caso de termos já em memória cacheado algumas das coisas presentes na query. Também fiz alguns ajustes para manter a a11y dos cards.
 
 ## Decisões técnicas
 
@@ -33,6 +34,8 @@ Neste último final de semana participei do Front in Floripa e curti a proposta 
 - Utilizar Debounce para evitar sobrecarga de requisições e prejudicar a UX quando pesquisar personagem por nome.
 - Utilizar Map dentro da Store de favoritos para persistir cada personagem indexado a partir de seu ID. Isso torna operações de acesso, adição e deleção mais simples.
 - Salvar o timestamp do momento em que se favoritou um personagem para permitir implementações futuras de reconciliação/refetch com a API externa.
+- Pensei em converter os cards em buttons para acionar o modal de mais dados, mas a especificação do HTML não permite nested buttons. Assim, segui utilizando uma div mas fiz alguns ajustes com atributos ARIA, role e manipulando eventos de teclado. Isso é importante para manter a acessibilidade (a11y), permitindo a navegação através de teclado e oferecendo ao usuário informações do que aquele elemento faz.
+- Implementei o modal utilizando o elemento nativo do HTML Dialog. Com ele, já temos garantidos vários recursos de acessibilidade e também seguimos boas práticas de adotar um elemento apropriado existente. Para controlá-lo, temos que utilizar o useEffect para controlar sua API de abertura e fechamento (o controle através do atributo open não adiciona backdrop). Este é um dos poucos casos em que o useEffect é aceitável conforme a [documentação do React](https://react.dev/reference/react/useEffect#controlling-a-non-react-widget).
 
 ### Sobre as Ferramentas e tecnologias:
 
