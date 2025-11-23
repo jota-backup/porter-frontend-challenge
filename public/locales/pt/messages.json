@@ -11,7 +11,11 @@
 		"characterCard": {
 			"unknownOrigin": "Origem desconhecida",
 			"unknownName": "Desconhecido",
-			"unknownStatus": "Desconhecido"
+			"unknownStatus": "Desconhecido",
+			"addToFavorites": "Adicionar {{name}} aos favoritos",
+			"removeFromFavorites": "Remover {{name}} dos favoritos",
+			"addedToFavorites": "{{name}} adicionado aos favoritos",
+			"removedFromFavorites": "{{name}} removido dos favoritos"
 		},
 		"characterModal": {
 			"species": "Espécie",

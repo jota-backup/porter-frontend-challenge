@@ -1,7 +1,8 @@
 import { Heart, MapPin } from "lucide-react";
+import toast from "react-hot-toast";
 import { useTranslation } from "react-i18next";
 import styled, { useTheme } from "styled-components";
-import { useFavoritesStore } from "../../../store/useFavoritesStore";
+import { useFavoriteCharacter } from "../../../hooks/useFavoriteCharacter";
 import { useModalStore } from "../../../store/useModalStore";
 import type { BaseCharacterFragment } from "../../../types/__generated__/graphql";
 import { StatusBadge } from "../StatusBadge";
@@ -107,23 +108,17 @@ export const CharacterCard = ({ character }: CharacterCardProps) => {
 	const theme = useTheme();
 	const { openCharacterModal } = useModalStore();
 
-	const isCharacterFavorite = useFavoritesStore((state) =>
-		character?.id ? state.favorites.has(character.id) : false,
-	);
+	const name = character.name ?? t("dashboard.characterCard.unknownName");
 
-	const addFavorite = useFavoritesStore((state) => state.addFavorite);
-	const removeFavorite = useFavoritesStore((state) => state.removeFavorite);
-
-	const toggleFavorite = (e: React.MouseEvent) => {
-		e.stopPropagation();
-		if (!character.id) return;
-
-		if (isCharacterFavorite) {
-			removeFavorite(character.id);
-		} else {
-			addFavorite(character);
-		}
-	};
+	const { isCharacterFavorite, toggleFavorite } = useFavoriteCharacter({
+		character,
+		onAdd: () => {
+			toast.success(t("dashboard.characterCard.addedToFavorites", { name }));
+		},
+		onRemove: () => {
+			toast.success(t("dashboard.characterCard.removedFromFavorites", { name }));
+		},
+	});
 
 	const handleCardClick = () => {
 		if (character.id) {
@@ -138,9 +133,8 @@ export const CharacterCard = ({ character }: CharacterCardProps) => {
 		}
 	};
 
-	const name = character.name ?? t("dashboard.characterCard.unknownName");
 	const status = character.status ?? t("dashboard.characterCard.unknownStatus");
-	const image = character.image ?? "";
+	const image = character.image ?? undefined;
 
 	return (
 		<Card
@@ -152,7 +146,15 @@ export const CharacterCard = ({ character }: CharacterCardProps) => {
 		>
 			<ImageContainer>
 				<Image src={image} alt={name} />
-				<HeartButton type="button" onClick={toggleFavorite}>
+				<HeartButton
+					type="button"
+					onClick={toggleFavorite}
+					aria-label={
+						isCharacterFavorite
+							? t("dashboard.characterCard.removeFromFavorites", { name })
+							: t("dashboard.characterCard.addToFavorites", { name })
+					}
+				>
 					<Heart
 						size={20}
 						color={theme.colors.heart}
