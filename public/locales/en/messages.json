@@ -13,6 +13,16 @@
 			"unknownName": "Unknown",
 			"unknownStatus": "Unknown"
 		},
+		"characterModal": {
+			"species": "Species",
+			"gender": "Gender",
+			"location": "Location",
+			"origin": "Origin",
+			"featuredIn": "Featured in",
+			"episode": "Episode",
+			"episodes": "Episodes",
+			"viewEpisodes": "View Episodes"
+		},
 		"characterList": {
 			"loading": "Loading characters...",
 			"error": "Error loading characters. Please try again.",

@@ -1,7 +1,9 @@
 import { Suspense } from "react";
 import { Toaster } from "react-hot-toast";
 import { useFilterStore } from "./store/useFilterStore";
+import { useModalStore } from "./store/useModalStore";
 import { AllCharactersContainer } from "./ui/components/AllCharactersContainer";
+import { CharacterDetailsModal } from "./ui/components/CharacterDetailsModal";
 import { ErrorBoundary } from "./ui/components/ErrorBoundary";
 import { FavoritesContainer } from "./ui/components/FavoritesContainer";
 import { FilterSection } from "./ui/components/FilterSection";
@@ -11,6 +13,7 @@ import { Spinner } from "./ui/components/Spinner";
 
 function App() {
 	const { activeFilter } = useFilterStore();
+	const { isModalOpen } = useModalStore();
 
 	return (
 		<>
@@ -28,6 +31,7 @@ function App() {
 					)}
 				</ErrorBoundary>
 			</Layout>
+			{isModalOpen && <CharacterDetailsModal />}
 		</>
 	);
 }

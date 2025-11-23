@@ -3,13 +3,22 @@ import toast from "react-hot-toast";
 import { useTranslation } from "react-i18next";
 import styled from "styled-components";
 import { useFavoritesStore } from "../../../store/useFavoritesStore";
+import { useModalStore } from "../../../store/useModalStore";
 import type { BaseCharacterFragment } from "../../../types/__generated__/graphql";
 
 interface CharacterCardProps {
 	character: BaseCharacterFragment;
 }
 
-const Card = styled.div`
+const Card = styled.button`
+	border: none;
+	background: none;
+	padding: 0;
+	text-align: left;
+	font: inherit;
+	cursor: pointer;
+	width: 100%;
+
 	background-color: ${({ theme }) => theme.colors.background.primary};
 	border-radius: 0.75rem;
 	box-shadow: ${({ theme }) => theme.shadows.sm};
@@ -18,6 +27,11 @@ const Card = styled.div`
 
 	&:hover {
 		box-shadow: ${({ theme }) => theme.shadows.md};
+	}
+
+	&:focus-visible {
+		outline: 2px solid ${({ theme }) => theme.colors.primary.default};
+		outline-offset: 2px;
 	}
 `;
 
@@ -113,13 +127,23 @@ const Origin = styled.p`
 export const CharacterCard = ({ character }: CharacterCardProps) => {
 	const { t } = useTranslation();
 	const { isFavorite, addFavorite, removeFavorite } = useFavoritesStore();
+	const { openCharacterModal } = useModalStore();
 
 	const isCharacterFavorite = character.id ? isFavorite(character.id) : false;
 
-	const toggleFavorite = () => {
+	const handleCardClick = () => {
+		if (character.id) {
+			openCharacterModal(character.id);
+		}
+	};
+
+	const handleFavoriteClick = (e: React.MouseEvent) => {
+		e.stopPropagation();
+
 		if (!character.id) return;
 
-		const characterName = character.name || t("dashboard.characterCard.unknownName");
+		const characterName =
+			character.name || t("dashboard.characterCard.unknownName");
 
 		if (isCharacterFavorite) {
 			removeFavorite(character.id);
@@ -135,10 +159,10 @@ export const CharacterCard = ({ character }: CharacterCardProps) => {
 	const image = character.image ?? "";
 
 	return (
-		<Card>
+		<Card onClick={handleCardClick} aria-label={`View details for ${name}`}>
 			<ImageContainer>
 				<Image src={image} alt={name} />
-				<HeartButton type="button" onClick={toggleFavorite}>
+				<HeartButton type="button" onClick={handleFavoriteClick}>
 					<Heart
 						size={20}
 						color="#EF4444"
