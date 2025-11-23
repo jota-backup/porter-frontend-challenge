@@ -1,9 +1,11 @@
 import { useSuspenseQuery } from "@apollo/client/react";
-import { Dna, Globe, MapPin, Monitor, User2 } from "lucide-react";
+import { Dna, Globe, Heart, MapPin, Monitor, User2 } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import styled from "styled-components";
+import { useFavorite } from "../../../hooks/useFavorite";
 import { GET_CHARACTER_DETAILS } from "../../../graphql/queries/getCharacterDetails";
 import type {
+	BaseCharacterFragment,
 	GetCharacterDetailsQuery,
 	GetCharacterDetailsQueryVariables,
 } from "../../../types/__generated__/graphql";
@@ -75,6 +77,34 @@ const SpeciesText = styled.span`
 	color: white;
 `;
 
+const FavoriteButton = styled.button`
+	position: absolute;
+	top: 1rem;
+	right: 4.5rem;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 2.5rem;
+	height: 2.5rem;
+	border: none;
+	background-color: rgba(255, 255, 255, 0.9);
+	cursor: pointer;
+	border-radius: 50%;
+	transition: all 0.2s ease;
+	z-index: 20;
+	box-shadow: ${({ theme }) => theme.shadows.md};
+
+	&:hover {
+		background-color: white;
+		transform: scale(1.05);
+	}
+
+	&:focus-visible {
+		outline: 2px solid ${({ theme }) => theme.colors.primary.default};
+		outline-offset: 2px;
+	}
+`;
+
 const InfoSection = styled.div`
 	padding: 1.5rem;
 `;
@@ -121,7 +151,7 @@ const IconCircle = styled.div`
 
 const InfoValue = styled.div`
 	font-size: ${({ theme }) => theme.typography.fontSize.base};
-	font-weight: ${({ theme }) => theme.typography.fontWeight.semibold};
+	font-weight: ${({ theme }) => theme.typography.fontWeight.bold};
 	color: ${({ theme }) => theme.colors.text.primary};
 	padding-left: 2.5rem;
 `;
@@ -165,7 +195,7 @@ const EpisodeLabel = styled.span`
 `;
 
 const EpisodeCount = styled.span`
-	font-size: ${({ theme }) => theme.typography.fontSize.xl};
+	font-size: ${({ theme }) => theme.typography.fontSize["2xl"]};
 	font-weight: ${({ theme }) => theme.typography.fontWeight.bold};
 	color: ${({ theme }) => theme.colors.text.primary};
 `;
@@ -183,6 +213,9 @@ export const CharacterDetailsContent = ({
 	});
 
 	const character = data?.character;
+	const { isFavorite: isCharacterFavorite, toggleFavorite } = useFavorite(
+		character as BaseCharacterFragment | null | undefined,
+	);
 
 	if (!character) return null;
 
@@ -195,6 +228,21 @@ export const CharacterDetailsContent = ({
 		<Content>
 			<ImageContainer>
 				<Image src={image} alt={name} />
+				<FavoriteButton
+					type="button"
+					onClick={toggleFavorite}
+					aria-label={
+						isCharacterFavorite
+							? `Remove ${name} from favorites`
+							: `Add ${name} to favorites`
+					}
+				>
+					<Heart
+						size={20}
+						color="#EF4444"
+						fill={isCharacterFavorite ? "#EF4444" : "none"}
+					/>
+				</FavoriteButton>
 				<ImageOverlay>
 					<Name id="character-name">{name}</Name>
 					<BadgeGroup>
@@ -263,8 +311,8 @@ export const CharacterDetailsContent = ({
 						</EpisodeIconCircle>
 						<EpisodesText>
 							<EpisodeLabel>
-							{t("dashboard.characterModal.featuredIn")}
-						</EpisodeLabel>
+								{t("dashboard.characterModal.featuredIn")}
+							</EpisodeLabel>
 							{character.episode ? (
 								<EpisodeCount>
 									{character.episode.length}{" "}
