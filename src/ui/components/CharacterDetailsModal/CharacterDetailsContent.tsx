@@ -13,10 +13,7 @@ import { Spinner } from "../Spinner";
 import { CharacterEpisodes } from "./CharacterEpisodes";
 import { CharacterHeader } from "./CharacterHeader";
 import { CharacterInfoCard } from "./CharacterInfoCard";
-
-interface CharacterDetailsContentProps {
-	characterId: string;
-}
+import type { CharacterDetailsContentProps } from "./types";
 
 const Content = styled.div``;
 

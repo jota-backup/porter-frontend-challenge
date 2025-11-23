@@ -1,12 +1,5 @@
-import type { LucideIcon } from "lucide-react";
-import type { ReactNode } from "react";
 import styled from "styled-components";
-
-interface CharacterInfoCardProps {
-	icon: LucideIcon;
-	label: string;
-	value: ReactNode;
-}
+import type { CharacterInfoCardProps } from "./types";
 
 const InfoItem = styled.div`
 	display: flex;

@@ -1,10 +1,6 @@
-import type { ReactNode } from "react";
 import styled from "styled-components";
 import { Nav } from "../Nav";
-
-interface LayoutProps {
-	children: ReactNode;
-}
+import type { LayoutProps } from "./types";
 
 const LayoutContainer = styled.div`
 	display: flex;

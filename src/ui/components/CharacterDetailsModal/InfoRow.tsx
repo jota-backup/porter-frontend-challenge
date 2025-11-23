@@ -1,10 +1,5 @@
-import type { ReactNode } from "react";
 import styled from "styled-components";
-
-interface InfoRowProps {
-	label: string;
-	value: ReactNode;
-}
+import type { InfoRowProps } from "./types";
 
 const Row = styled.div`
 	display: flex;

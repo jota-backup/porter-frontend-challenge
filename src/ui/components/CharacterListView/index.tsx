@@ -1,9 +1,9 @@
 import { useTranslation } from "react-i18next";
 import styled from "styled-components";
-import type { BaseCharacterFragment } from "../../../types/__generated__/graphql";
 import { CharacterCard } from "../CharacterCard";
 import { CharacterGrid } from "../CharacterGrid";
 import { Pagination } from "../Pagination";
+import type { CharacterListViewProps } from "./types";
 
 const Container = styled.div`
 	width: 100%;
@@ -15,16 +15,6 @@ const EmptyMessage = styled.div`
 	font-size: ${({ theme }) => theme.typography.fontSize.lg};
 	color: ${({ theme }) => theme.colors.text.secondary};
 `;
-
-interface CharacterListViewProps {
-	characters: BaseCharacterFragment[];
-	paginationInfo: {
-		currentPage: number;
-		totalPages: number;
-	};
-	onPageChange: (page: number) => void;
-	isPending?: boolean;
-}
 
 export const CharacterListView = ({
 	characters,

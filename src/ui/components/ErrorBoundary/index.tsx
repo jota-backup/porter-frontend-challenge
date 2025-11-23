@@ -1,18 +1,7 @@
-import type { ReactNode } from "react";
 import { Component } from "react";
-import type { WithTranslation } from "react-i18next";
 import { withTranslation } from "react-i18next";
 import styled from "styled-components";
-
-interface ErrorBoundaryProps extends WithTranslation {
-	children: ReactNode;
-	fallback?: ReactNode;
-}
-
-interface ErrorBoundaryState {
-	hasError: boolean;
-	error: Error | null;
-}
+import type { ErrorBoundaryProps, ErrorBoundaryState } from "./types";
 
 const ErrorContainer = styled.div`
 	text-align: center;

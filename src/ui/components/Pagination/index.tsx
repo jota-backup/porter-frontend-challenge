@@ -2,13 +2,7 @@ import { useTranslation } from "react-i18next";
 import ReactPaginate from "react-paginate";
 import styled from "styled-components";
 import { Spinner } from "../Spinner";
-
-interface PaginationProps {
-	currentPage: number;
-	totalPages: number;
-	onPageChange: (page: number) => void;
-	isPending?: boolean;
-}
+import type { PaginationProps } from "./types";
 
 const PaginationWrapper = styled.div`
 	display: flex;

@@ -1,11 +1,6 @@
 import { Monitor } from "lucide-react";
-import type { ReactNode } from "react";
 import styled from "styled-components";
-
-interface CharacterEpisodesProps {
-	label: string;
-	count: ReactNode;
-}
+import type { CharacterEpisodesProps } from "./types";
 
 const EpisodesCard = styled.div`
 	display: flex;

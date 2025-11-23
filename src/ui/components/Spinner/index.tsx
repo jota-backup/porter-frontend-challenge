@@ -1,8 +1,5 @@
 import styled, { keyframes } from "styled-components";
-
-interface SpinnerProps {
-	size?: "default" | "small";
-}
+import type { SpinnerProps } from "./types";
 
 const spin = keyframes`
 	to {

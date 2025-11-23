@@ -1,9 +1,5 @@
-import type { ReactNode } from "react";
 import styled from "styled-components";
-
-interface CharacterGridProps {
-	children: ReactNode;
-}
+import type { CharacterGridProps } from "./types";
 
 const Grid = styled.div`
 	display: grid;

@@ -4,12 +4,8 @@ import { useTranslation } from "react-i18next";
 import styled, { useTheme } from "styled-components";
 import { useFavoriteCharacter } from "../../../hooks/useFavoriteCharacter";
 import { useModalStore } from "../../../store/useModalStore";
-import type { BaseCharacterFragment } from "../../../types/__generated__/graphql";
 import { StatusBadge } from "../StatusBadge";
-
-interface CharacterCardProps {
-	character: BaseCharacterFragment;
-}
+import type { CharacterCardProps } from "./types";
 
 const Card = styled.div`
 	cursor: pointer;

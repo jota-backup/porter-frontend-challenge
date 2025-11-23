@@ -1,9 +1,5 @@
 import styled from "styled-components";
-
-interface StatusBadgeProps {
-	status: string;
-	className?: string;
-}
+import type { StatusBadgeProps } from "./types";
 
 const Badge = styled.span<{ $status: string }>`
 	padding: 0.25rem 0.75rem;

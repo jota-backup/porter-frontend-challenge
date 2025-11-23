@@ -1,17 +1,8 @@
 import { Heart } from "lucide-react";
-import type { ReactNode } from "react";
 import { useTranslation } from "react-i18next";
 import styled, { useTheme } from "styled-components";
 import { StatusBadge } from "../StatusBadge";
-
-interface CharacterHeaderProps {
-	name: string;
-	image: string;
-	status: string;
-	species: ReactNode;
-	isFavorite: boolean;
-	onToggleFavorite: () => void;
-}
+import type { CharacterHeaderProps } from "./types";
 
 const ImageContainer = styled.div`
 	position: relative;
