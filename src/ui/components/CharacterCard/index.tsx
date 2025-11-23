@@ -1,6 +1,6 @@
 import { Heart, MapPin } from "lucide-react";
 import { useTranslation } from "react-i18next";
-import styled from "styled-components";
+import styled, { useTheme } from "styled-components";
 import { useFavorite } from "../../../hooks/useFavorite";
 import { useModalStore } from "../../../store/useModalStore";
 import type { BaseCharacterFragment } from "../../../types/__generated__/graphql";
@@ -104,6 +104,7 @@ const Origin = styled.p`
 
 export const CharacterCard = ({ character }: CharacterCardProps) => {
 	const { t } = useTranslation();
+	const theme = useTheme();
 	const { openCharacterModal } = useModalStore();
 	const { isFavorite: isCharacterFavorite, toggleFavorite } =
 		useFavorite(character);
@@ -138,8 +139,8 @@ export const CharacterCard = ({ character }: CharacterCardProps) => {
 				<HeartButton type="button" onClick={toggleFavorite}>
 					<Heart
 						size={20}
-						color="#EF4444"
-						fill={isCharacterFavorite ? "#EF4444" : "none"}
+						color={theme.colors.heart}
+						fill={isCharacterFavorite ? theme.colors.heart : "none"}
 					/>
 				</HeartButton>
 				<PositionedStatusBadge status={status} />

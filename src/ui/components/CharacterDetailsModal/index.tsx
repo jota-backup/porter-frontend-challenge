@@ -20,7 +20,7 @@ const Dialog = styled.dialog`
 	inset: 0;
 
 	&::backdrop {
-		background-color: rgba(0, 0, 0, 0.6);
+		background-color: ${({ theme }) => theme.colors.overlay.dark};
 		backdrop-filter: blur(4px);
 	}
 `;
@@ -35,7 +35,7 @@ const CloseButton = styled.button`
 	width: 2.5rem;
 	height: 2.5rem;
 	border: none;
-	background-color: rgba(255, 255, 255, 0.9);
+	background-color: ${({ theme }) => theme.colors.overlay.light};
 	color: ${({ theme }) => theme.colors.text.secondary};
 	cursor: pointer;
 	border-radius: 50%;

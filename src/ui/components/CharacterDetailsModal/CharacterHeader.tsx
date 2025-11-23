@@ -1,6 +1,6 @@
 import { Heart } from "lucide-react";
 import type { ReactNode } from "react";
-import styled from "styled-components";
+import styled, { useTheme } from "styled-components";
 import { StatusBadge } from "../StatusBadge";
 
 interface CharacterHeaderProps {
@@ -35,7 +35,7 @@ const FavoriteButton = styled.button`
 	width: 2.5rem;
 	height: 2.5rem;
 	border: none;
-	background-color: rgba(255, 255, 255, 0.9);
+	background-color: ${({ theme }) => theme.colors.overlay.light};
 	cursor: pointer;
 	border-radius: 50%;
 	transition: all 0.2s ease;
@@ -59,7 +59,7 @@ const ImageOverlay = styled.div`
 	left: 0;
 	right: 0;
 	padding: 2rem 1.5rem 1.5rem;
-	background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+	background: linear-gradient(to top, ${({ theme }) => theme.colors.overlay.darkStrong}, transparent);
 `;
 
 const Name = styled.h2`
@@ -95,6 +95,8 @@ export const CharacterHeader = ({
 	isFavorite,
 	onToggleFavorite,
 }: CharacterHeaderProps) => {
+	const theme = useTheme();
+
 	return (
 		<ImageContainer>
 			<Image src={image} alt={name} />
@@ -105,7 +107,11 @@ export const CharacterHeader = ({
 					isFavorite ? `Remove ${name} from favorites` : `Add ${name} to favorites`
 				}
 			>
-				<Heart size={20} color="#EF4444" fill={isFavorite ? "#EF4444" : "none"} />
+				<Heart
+					size={20}
+					color={theme.colors.heart}
+					fill={isFavorite ? theme.colors.heart : "none"}
+				/>
 			</FavoriteButton>
 			<ImageOverlay>
 				<Name id="character-name">{name}</Name>

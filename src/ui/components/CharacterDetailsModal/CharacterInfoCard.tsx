@@ -33,7 +33,7 @@ const IconCircle = styled.div`
 	width: 2rem;
 	height: 2rem;
 	border-radius: 0.5rem;
-	background-color: rgba(99, 102, 241, 0.1);
+	background-color: ${({ theme }) => theme.colors.overlay.primary};
 	color: ${({ theme }) => theme.colors.primary.default};
 
 	svg {

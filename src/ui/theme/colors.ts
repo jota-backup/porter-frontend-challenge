@@ -9,6 +9,7 @@ export const colors = {
 	warning: "#F59E0B",
 	error: "#EF4444",
 	info: "#3B82F6",
+	heart: "#EF4444",
 
 	gray: {
 		50: "#F9FAFB",
@@ -42,6 +43,13 @@ export const colors = {
 		light: "#E5E7EB",
 		default: "#D1D5DB",
 		dark: "#9CA3AF",
+	},
+
+	overlay: {
+		dark: "rgba(0, 0, 0, 0.6)",
+		darkStrong: "rgba(0, 0, 0, 0.8)",
+		light: "rgba(255, 255, 255, 0.9)",
+		primary: "rgba(99, 102, 241, 0.1)",
 	},
 } as const;
 
