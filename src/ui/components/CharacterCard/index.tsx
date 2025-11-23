@@ -10,15 +10,9 @@ interface CharacterCardProps {
 	character: BaseCharacterFragment;
 }
 
-const Card = styled.button`
-	border: none;
-	background: none;
-	padding: 0;
-	text-align: left;
-	font: inherit;
+const Card = styled.div`
 	cursor: pointer;
 	width: 100%;
-
 	background-color: ${({ theme }) => theme.colors.background.primary};
 	border-radius: 0.75rem;
 	box-shadow: ${({ theme }) => theme.shadows.sm};
@@ -137,6 +131,13 @@ export const CharacterCard = ({ character }: CharacterCardProps) => {
 		}
 	};
 
+	const handleKeyDown = (e: React.KeyboardEvent) => {
+		if (e.key === "Enter" || e.key === " ") {
+			e.preventDefault();
+			handleCardClick();
+		}
+	};
+
 	const handleFavoriteClick = (e: React.MouseEvent) => {
 		e.stopPropagation();
 
@@ -159,7 +160,13 @@ export const CharacterCard = ({ character }: CharacterCardProps) => {
 	const image = character.image ?? "";
 
 	return (
-		<Card onClick={handleCardClick} aria-label={`View details for ${name}`}>
+		<Card
+			role="button"
+			tabIndex={0}
+			onClick={handleCardClick}
+			onKeyDown={handleKeyDown}
+			aria-label={`View details for ${name}`}
+		>
 			<ImageContainer>
 				<Image src={image} alt={name} />
 				<HeartButton type="button" onClick={handleFavoriteClick}>
