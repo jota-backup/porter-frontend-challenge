@@ -8,6 +8,7 @@ const mockOpenCharacterModal = vi.fn();
 const mockAddFavorite = vi.fn();
 const mockRemoveFavorite = vi.fn();
 const mockHasFavorite = vi.fn(() => false);
+const mockToastSuccess = vi.fn();
 
 vi.mock("../../../store/useModalStore", () => ({
 	useModalStore: () => ({
@@ -28,13 +29,24 @@ vi.mock("../../../store/useFavoritesStore", () => ({
 	},
 }));
 
+vi.mock("react-hot-toast", () => ({
+	default: {
+		success: mockToastSuccess,
+	},
+}));
+
 vi.mock("react-i18next", () => ({
 	useTranslation: () => ({
-		t: (key: string) => {
+		t: (key: string, params?: any) => {
 			const translations: Record<string, string> = {
 				"dashboard.characterCard.unknownName": "Unknown Name",
 				"dashboard.characterCard.unknownStatus": "Unknown",
 				"dashboard.characterCard.unknownOrigin": "Unknown Origin",
+				"dashboard.characterCard.addToFavorites": `Add ${params?.name} to favorites`,
+				"dashboard.characterCard.removeFromFavorites": `Remove ${params?.name} from favorites`,
+				"dashboard.characterCard.addedToFavorites": `${params?.name} added to favorites`,
+				"dashboard.characterCard.removedFromFavorites": `${params?.name} removed from favorites`,
+				"dashboard.characterCard.viewDetails": `View details for ${params?.name}`,
 			};
 			return translations[key] || key;
 		},
@@ -62,6 +74,7 @@ const renderWithTheme = async (component: React.ReactElement) => {
 beforeEach(() => {
 	vi.clearAllMocks();
 	mockHasFavorite.mockReturnValue(false);
+	mockToastSuccess.mockClear();
 });
 
 test("renders character information correctly", async () => {
