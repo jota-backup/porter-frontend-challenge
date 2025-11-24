@@ -2,7 +2,7 @@
 
 Salve pessoal da Porter! Sou o Jota e esta é a minha proposta de solução para o Desafio Técnico de vocês. Neste README vocês poderão acompanhar as decisões que tomei durante o projeto, o contexto em torno delas, documentação relativa à estrutura do repositório, como rodar a aplicação, etc.
 
-> _Gostaria de registrar aqui que me comprometo em não utilizar IA nesta parte de documentação para explicar as minhas decisões de ferramentas. Sua ajuda foi só para formatar o documento e implementar seções como a Como rodar o projeto e Estrutura do projeto_
+> _Gostaria de registrar aqui que me comprometo em não utilizar IA nesta parte de documentação para explicar as minhas decisões e ferramentas utilizadas. Sua ajuda foi só para formatar o documento e implementar seções como a "Como rodar o projeto" e "Estrutura do projeto"_
 
 ---
 
@@ -23,7 +23,7 @@ Single Page Application (SPA) desenvolvida com **React 19 + TypeScript + Vite**,
 
 1. **Clone o repositório:**
    ```bash
-   git clone <url-do-repositorio>
+   git clone git@github.com:jvkf/porter-frontend-challenge.git
    cd porter-frontend-challenge
    ```
 
@@ -58,7 +58,7 @@ pnpm preview
 
 ### Docker
 
-Para construir e rodar a imagem Docker em produção use o `pnpm build` e então:
+Para construir e rodar a imagem Docker em produção:
 
 ```bash
 # Build da imagem
@@ -187,9 +187,9 @@ Segui a indicação do desafio. Implementei um tema base com cores, sombras e ti
 
 ### Testes
 
-**Vitest Browser Mode + Playwright**
+**Vitest + RTL**
 
-Apesar dos requisitos indicarem RTL/Jest, implementei usando Vitest Browser Mode. A API de asserções é bem parecida com RTL (o time se inspirou nele), mas oferece ambiente nativo de navegador ao invés de JSDOM. Isso elimina bugs relacionados ao ambiente simulado e a performance com Playwright é excelente. Fiz essa escolha por querer usar algo mais moderno, e o setup foi muito mais rápido.
+Implementei os testes utilizando Vitest e RTL. Inicialmente, havia testado o Browser mode do Vitest por estar em versão estável e ser um ambiente nativo, garantindo maior segurança aos testes. Mas me atentei que o desafio requer especificamente o uso desse setup (Vitest é compatível com a API do Jest), resolvi mudar e utilizar o RTL com JSDOM.
 
 ### Decisões de UX e Performance
 
