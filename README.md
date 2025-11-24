@@ -23,7 +23,7 @@ Single Page Application (SPA) desenvolvida com **React 19 + TypeScript + Vite**,
 
 1. **Clone o repositório:**
    ```bash
-   git clone git@github.com:jvkf/porter-frontend-challenge.git
+   git clone git@github.com:jota-backup/porter-frontend-challenge.git
    cd porter-frontend-challenge
    ```
 
