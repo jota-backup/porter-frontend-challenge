@@ -97,7 +97,10 @@ export const CharacterDetailsModal = () => {
 			onClick={handleBackdropClick}
 			aria-labelledby="character-name"
 		>
-			<CloseButton onClick={closeModal} aria-label={t("dashboard.characterModal.closeModal")}>
+			<CloseButton
+				onClick={closeModal}
+				aria-label={t("dashboard.characterModal.closeModal")}
+			>
 				<X size={20} />
 			</CloseButton>
 

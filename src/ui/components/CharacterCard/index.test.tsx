@@ -1,6 +1,6 @@
-import { expect, test, vi, beforeEach } from "vitest";
-import { render } from "vitest-browser-react";
 import { ThemeProvider } from "styled-components";
+import { beforeEach, expect, test, vi } from "vitest";
+import { render } from "vitest-browser-react";
 import type { BaseCharacterFragment } from "../../../types/__generated__/graphql";
 import { theme } from "../../theme";
 

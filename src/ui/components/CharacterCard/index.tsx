@@ -112,7 +112,9 @@ export const CharacterCard = ({ character }: CharacterCardProps) => {
 			toast.success(t("dashboard.characterCard.addedToFavorites", { name }));
 		},
 		onRemove: () => {
-			toast.success(t("dashboard.characterCard.removedFromFavorites", { name }));
+			toast.success(
+				t("dashboard.characterCard.removedFromFavorites", { name }),
+			);
 		},
 	});
 

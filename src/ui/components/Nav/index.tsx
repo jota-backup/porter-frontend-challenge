@@ -140,7 +140,10 @@ export const Nav = () => {
 				<NavItem>
 					<LanguageSelectWrapper>
 						<LanguageIcon size={16} />
-						<LanguageSelect value={i18n.language} onChange={handleLanguageChange}>
+						<LanguageSelect
+							value={i18n.language}
+							onChange={handleLanguageChange}
+						>
 							{AVAILABLE_LOCALES.map((locale) => (
 								<option key={locale.code} value={locale.code}>
 									{locale.flag} {locale.name}
