@@ -1,12 +1,12 @@
 import { useSuspenseQuery } from "@apollo/client/react";
 import { useState } from "react";
 import { useDebounce } from "use-debounce";
-import { GET_CHARACTERS } from "../graphql/queries/getCharacters";
-import { useFilterStore } from "../store/useFilterStore";
+import { GET_CHARACTERS } from "@/graphql/queries/getCharacters";
+import { useFilterStore } from "@/store/useFilterStore";
 import type {
 	GetCharactersQuery,
 	GetCharactersQueryVariables,
-} from "../types/__generated__/graphql";
+} from "@/types/__generated__/graphql";
 
 export const useCharacters = (variables?: GetCharactersQueryVariables) => {
 	const [currentPage, setCurrentPage] = useState(1);

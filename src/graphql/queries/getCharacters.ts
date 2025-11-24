@@ -1,5 +1,5 @@
 import { gql } from "@apollo/client";
-import { BASE_CHARACTER_FRAGMENT } from "../fragments/BaseCharacter";
+import { BASE_CHARACTER_FRAGMENT } from "@/graphql/fragments/BaseCharacter";
 
 export const GET_CHARACTERS = gql`
 	${BASE_CHARACTER_FRAGMENT}

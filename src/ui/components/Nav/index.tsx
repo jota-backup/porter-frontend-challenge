@@ -1,7 +1,7 @@
 import { Languages, Users } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import styled from "styled-components";
-import { AVAILABLE_LOCALES } from "../../../i18n/locales";
+import { AVAILABLE_LOCALES } from "@/i18n/locales";
 
 const NavContainer = styled.nav`
 	display: flex;

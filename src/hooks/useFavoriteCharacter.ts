@@ -1,5 +1,5 @@
-import { useFavoritesStore } from "../store/useFavoritesStore";
-import type { BaseCharacterFragment } from "../types/__generated__/graphql";
+import { useFavoritesStore } from "@/store/useFavoritesStore";
+import type { BaseCharacterFragment } from "@/types/__generated__/graphql";
 
 interface UseFavoriteCharacterOptions {
 	character: BaseCharacterFragment | null | undefined;

@@ -1,7 +1,7 @@
 import { Heart, Search, Users } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import styled from "styled-components";
-import { useFilterStore } from "../../../store/useFilterStore";
+import { useFilterStore } from "@/store/useFilterStore";
 
 const Container = styled.div`
 	display: flex;

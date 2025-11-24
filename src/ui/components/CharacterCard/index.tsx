@@ -2,9 +2,9 @@ import { Heart, MapPin } from "lucide-react";
 import toast from "react-hot-toast";
 import { useTranslation } from "react-i18next";
 import styled, { useTheme } from "styled-components";
-import { useFavoriteCharacter } from "../../../hooks/useFavoriteCharacter";
-import { useModalStore } from "../../../store/useModalStore";
-import { StatusBadge } from "../StatusBadge";
+import { useFavoriteCharacter } from "@/hooks/useFavoriteCharacter";
+import { useModalStore } from "@/store/useModalStore";
+import { StatusBadge } from "@/ui/components/StatusBadge";
 import type { CharacterCardProps } from "./types";
 
 const Card = styled.div`

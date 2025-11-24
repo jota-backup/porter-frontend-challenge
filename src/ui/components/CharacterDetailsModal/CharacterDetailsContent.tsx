@@ -2,14 +2,14 @@ import { useSuspenseQuery } from "@apollo/client/react";
 import { Dna, Globe, MapPin, User2 } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import styled from "styled-components";
-import { GET_CHARACTER_DETAILS } from "../../../graphql/queries/getCharacterDetails";
-import { useFavoriteCharacter } from "../../../hooks/useFavoriteCharacter";
+import { GET_CHARACTER_DETAILS } from "@/graphql/queries/getCharacterDetails";
+import { useFavoriteCharacter } from "@/hooks/useFavoriteCharacter";
 import type {
 	BaseCharacterFragment,
 	GetCharacterDetailsQuery,
 	GetCharacterDetailsQueryVariables,
-} from "../../../types/__generated__/graphql";
-import { Spinner } from "../Spinner";
+} from "@/types/__generated__/graphql";
+import { Spinner } from "@/ui/components/Spinner";
 import { CharacterEpisodes } from "./CharacterEpisodes";
 import { CharacterHeader } from "./CharacterHeader";
 import { CharacterInfoCard } from "./CharacterInfoCard";

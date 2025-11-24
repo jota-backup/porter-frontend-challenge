@@ -1,7 +1,7 @@
 import { useTranslation } from "react-i18next";
 import ReactPaginate from "react-paginate";
 import styled from "styled-components";
-import { Spinner } from "../Spinner";
+import { Spinner } from "@/ui/components/Spinner";
 import type { PaginationProps } from "./types";
 
 const PaginationWrapper = styled.div`

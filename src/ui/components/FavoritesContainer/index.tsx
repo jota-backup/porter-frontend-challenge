@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { useFavoritesStore } from "../../../store/useFavoritesStore";
-import { useFilterStore } from "../../../store/useFilterStore";
-import { CharacterListView } from "../CharacterListView";
+import { useFavoritesStore } from "@/store/useFavoritesStore";
+import { useFilterStore } from "@/store/useFilterStore";
+import { CharacterListView } from "@/ui/components/CharacterListView";
 
 const ITEMS_PER_PAGE = 20;
 

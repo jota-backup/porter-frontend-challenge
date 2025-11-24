@@ -1,7 +1,7 @@
 import { Heart } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import styled, { useTheme } from "styled-components";
-import { StatusBadge } from "../StatusBadge";
+import { StatusBadge } from "@/ui/components/StatusBadge";
 import type { CharacterHeaderProps } from "./types";
 
 const ImageContainer = styled.div`

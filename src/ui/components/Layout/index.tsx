@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Nav } from "../Nav";
+import { Nav } from "@/ui/components/Nav";
 import type { LayoutProps } from "./types";
 
 const LayoutContainer = styled.div`

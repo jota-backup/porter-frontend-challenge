@@ -1,6 +1,6 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
-import type { BaseCharacterFragment } from "../types/__generated__/graphql";
+import type { BaseCharacterFragment } from "@/types/__generated__/graphql";
 
 export type FavoriteCharacter = BaseCharacterFragment & {
 	savedAt: number;

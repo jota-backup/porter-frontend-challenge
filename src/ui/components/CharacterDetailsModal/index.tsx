@@ -2,9 +2,9 @@ import { X } from "lucide-react";
 import { Suspense, useEffect, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import styled from "styled-components";
-import { useModalStore } from "../../../store/useModalStore";
-import { ErrorBoundary } from "../ErrorBoundary";
-import { Spinner } from "../Spinner";
+import { useModalStore } from "@/store/useModalStore";
+import { ErrorBoundary } from "@/ui/components/ErrorBoundary";
+import { Spinner } from "@/ui/components/Spinner";
 import { CharacterDetailsContent } from "./CharacterDetailsContent";
 
 const Dialog = styled.dialog`

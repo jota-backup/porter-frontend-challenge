@@ -1,8 +1,8 @@
 import { useTranslation } from "react-i18next";
 import styled from "styled-components";
-import { CharacterCard } from "../CharacterCard";
-import { CharacterGrid } from "../CharacterGrid";
-import { Pagination } from "../Pagination";
+import { CharacterCard } from "@/ui/components/CharacterCard";
+import { CharacterGrid } from "@/ui/components/CharacterGrid";
+import { Pagination } from "@/ui/components/Pagination";
 import type { CharacterListViewProps } from "./types";
 
 const Container = styled.div`

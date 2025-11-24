@@ -1,8 +1,8 @@
 import { ThemeProvider } from "styled-components";
 import { beforeEach, expect, test, vi } from "vitest";
 import { render } from "vitest-browser-react";
-import type { BaseCharacterFragment } from "../../../types/__generated__/graphql";
-import { theme } from "../../theme";
+import type { BaseCharacterFragment } from "@/types/__generated__/graphql";
+import { theme } from "@/ui/theme";
 
 const mockOpenCharacterModal = vi.fn();
 const mockAddFavorite = vi.fn();
@@ -10,13 +10,13 @@ const mockRemoveFavorite = vi.fn();
 const mockHasFavorite = vi.fn(() => false);
 const mockToastSuccess = vi.fn();
 
-vi.mock("../../../store/useModalStore", () => ({
+vi.mock("@/store/useModalStore", () => ({
 	useModalStore: () => ({
 		openCharacterModal: mockOpenCharacterModal,
 	}),
 }));
 
-vi.mock("../../../store/useFavoritesStore", () => ({
+vi.mock("@/store/useFavoritesStore", () => ({
 	useFavoritesStore: (selector: any) => {
 		const state = {
 			favorites: {

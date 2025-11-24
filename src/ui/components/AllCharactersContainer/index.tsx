@@ -1,6 +1,6 @@
 import { useTransition } from "react";
-import { useCharacters } from "../../../hooks/useCharacters";
-import { CharacterListView } from "../CharacterListView";
+import { useCharacters } from "@/hooks/useCharacters";
+import { CharacterListView } from "@/ui/components/CharacterListView";
 
 export const AllCharactersContainer = () => {
 	const [isPending, startTransition] = useTransition();
