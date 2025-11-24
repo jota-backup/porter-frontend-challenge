@@ -12,7 +12,7 @@
 		"lint": "pnpm exec biome lint --write",
 		"check": "pnpm exec biome check --write",
 		"prepare": "husky",
-		"test": "vitest --config=vitest.browser.config.ts"
+		"test": "vitest"
 	},
 	"dependencies": {
 		"@apollo/client": "^4.0.9",
@@ -31,7 +31,6 @@
 		"rxjs": "^7.8.2",
 		"styled-components": "^6.1.19",
 		"use-debounce": "^10.0.6",
-		"vitest": "^4.0.13",
 		"zustand": "^5.0.8"
 	},
 	"devDependencies": {
@@ -41,15 +40,18 @@
 		"@graphql-codegen/cli": "^6.1.0",
 		"@graphql-codegen/typescript": "^5.0.5",
 		"@graphql-codegen/typescript-operations": "^5.0.5",
+		"@testing-library/jest-dom": "^6.9.1",
+		"@testing-library/react": "^16.3.0",
+		"@testing-library/user-event": "^14.6.1",
 		"@types/node": "^24.10.1",
 		"@types/react": "^19.2.5",
 		"@types/react-dom": "^19.2.3",
 		"@vitejs/plugin-react": "^5.1.1",
-		"@vitest/browser-playwright": "^4.0.13",
 		"globals": "^16.5.0",
 		"husky": "^9.1.7",
+		"jsdom": "^27.2.0",
 		"typescript": "~5.9.3",
 		"vite": "^7.2.4",
-		"vitest-browser-react": "^2.0.2"
+		"vitest": "^4.0.13"
 	}
 }
