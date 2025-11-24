@@ -261,7 +261,7 @@ A API de persistência do Zustand permite configurar essas transformações cust
 
 ## 📚 Processo de Desenvolvimento
 
-Para detalhes sobre o processo de desenvolvimento, primeiras impressões, reflexões pós-implementação e diário detalhado das atividades, consulte o [DEVELOPMENT.md](./DEVELOPMENT.md).
+Para detalhes sobre o processo de desenvolvimento, primeiras impressões, reflexões pós-implementação e diário detalhado das atividades, consulte o [development.md](./docs/development.md).
 
 ---
 
