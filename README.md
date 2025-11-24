@@ -1,50 +1,281 @@
 # Desafio Técnico Frontend React - Porter
 
-Salve pessoal da Porter! Sou o Jota e esta é a minha proposta de solução para o Desafio Técnico de vocês. Nesse readme vocês poderão acompanhar as decisões que tomei durante o projeto, o contexto envolta delas, documentação relativa a estrutura do repositório, como rodar a aplicação, etc.
+Salve pessoal da Porter! Sou o Jota e esta é a minha proposta de solução para o Desafio Técnico de vocês. Neste README vocês poderão acompanhar as decisões que tomei durante o projeto, o contexto em torno delas, documentação relativa à estrutura do repositório, como rodar a aplicação, etc.
 
->_Gostaria de registrar aqui que me comprometo em não utilizar IA nesta parte documental por entender que conseguir sustentar minhas escolhas e explicá-las é uma das partes mais importantes nesse tipo de avaliação._
+> _Gostaria de registrar aqui que me comprometo em não utilizar IA nesta parte de documentação para explicar as minhas decisões de ferramentas. Sua ajuda foi só para formatar o documento e implementar seções como a Como rodar o projeto e Estrutura do projeto_
 
 ---
 
-## Primeiras impressões
+## TL;DR
 
-O desafio é bem objetivo - viabilizar o consumo de dados de uma API, permitir interações básicas dentro da aplicação e gerenciamento de estado. Minha leitura dessa proposta é que devo prezar por adotar boas práticas e, principalmente, colocar em evidência meu conhecimento sobre elas.
+Single Page Application (SPA) desenvolvida com **React 19 + TypeScript + Vite**, consumindo a [API do Rick and Morty](https://rickandmortyapi.com/graphql) via **GraphQL (Apollo Client)**. Implementa sistema de favoritos persistentes com **Zustand** + localStorage, internacionalização com **i18next**, estilização com **Styled Components**, e testes com **Vitest Browser Mode**. Containerizada com **Docker** (NGINX + multistage build).
 
-Além disso, acredito que seja fundamental implementar os diferenciais técnicos. É uma boa forma de ir além e mostrar habilidades que possuo. Vou documentar no tópico de decisões as minhas expectativas de tecnologias e ferramentas que pretendo adotar.
+---
 
-Neste último final de semana participei do Front in Floripa e curti a proposta apresentada pelo Vedovelli para uso de IA nos seus projetos. Assim, passei o desafio técnico para o Claude e pedi para ele elaborar um PRD que servirá de referência ao agente para me ajudar durante o desenvolvimento.
+## 🚀 Como Rodar o Projeto
 
-## Diário
+### Pré-requisitos
 
-> 20/11 (~18h): Terminei o esboço do README. Coloquei minhas primeiras impressões, escolhas de ferramentas e minhas opiniões sobre alguns tópicos. Agora pretendo avançar na criação da aplicação. Fazer o bootstrap com Vite, ajustes de tooling (Biome) e em seguida já garantir a internacionalização com react-i18next e a containeirização com Docker. Assim já deixo dois diferenciais técnicos bem encaminhados.
-> 20/11 (~20h30): Para a implementação do Docker, resolvi adotar as boas práticas de ter um processo multistep para instalar dependências + buildar a aplicação e, a partir dos arquivos gerados em /dist, servir a aplicação através de uma imagem NGINX. Já em termos de i18n, implementei a ferramenta seguindo a documentação da mesma e mantendo defaults (como namespace). Adicionei também um arquivo de declaração de tipos para utilizar somente mensagens existentes, assim melhorando a DX com Typescript.
-> 20/11 (21h): Vou utilizar a ferramenta UXPilot para gerar um design referência para essa entrega. Vou adicionar na pasta /docs depois o prompt usado e prints contendo os resultados.
-> 21/11 (12h): Agora vou focar na parte que acredito que pode demorar um pouco mais de tempo: configurar o Apollo Client e garantir o consumo dos dados que vou precisar, conforme orientação dada pelo PDF do desafio + design de referência.
-> 21/11 (13h30): Passei a última hora e meia lendo a documentação do Apollo Client. Gostei muito do que li sobre o uso de Suspense e maneiras de manipular o carregamento de queries - pretendo usar isso para fazer certas otimizações. Mas a cereja do bolo foi descobrir a existência do GraphQL Codegen. Fiz alguns testes e, pelo visto, ele é compatível com os schemas disponibilizados pela API do Rick and Morty. Vou investir um tempo nisso já que um dos critérios do desafio é o uso bem feito de TS.
-> 21/11 (17h): Com algumas pausas e leituras de documentação, fiz o setup do Styled Components junto de um tema base para a aplicação. Agora é hora de começar a dar vida a UI, já que já consigo consumir a API do GraphQL. 
-> 22/11 (09h): Ontem, explorei ideias de implementação, testando queries e formas de montar a página. Depois dessa exploração, deletei quase todos os arquivos e agora pretendo começar a fazer a construção da página de baixo para cima - vou começar fazendo renderizar os cards dos personagens, e depois avanço para a parte dos filtros.
-> 22/11 (16h): Implementei o primeiro grupo de requisitos que é a tela de usuários. Gastei um tempo para adicionar transições, refatorar para utilizar o useSuspenseQuery e garantir uma boa UX. Agora, pretendo implementar os filtros de maneira crua, sem funcionalidade, depois instalar o Zustand e configurar a store para salvar o estado dos filtros e torná-los funcionais.
-> 22/11 (18h30): Store de filtros criadas e input de pesquisa por nome já operando. O foco agora é construir a funcionalidade de favoritos. Vou deixar o modal de detalhes do personagem pro fim já que deve ser uma parte mais tranquila.
-> 22/11 (20h): Criei a store de favoritos e enfrentei uma das maiores refatorações até aqui - separar a lógica de buscar os personagens da camada de apresentação para garantir um código DRY. Isso permitiu fazer uma renderização condicional a depender do filtro selecionado, buscar os dados necessários, e manter um lugar centralizado para a apresentação com uma única instanciação de paginação, cards e grid (critério de reutilização de componentes). Também adicionei um toast para atender o requisito do desafio de feedback ao usuário.
-> 23/11 (15h): Implementei o modal de detalhes do usuário. Essa parte já foi bem mais intuitiva. Implementei um Error Boundary nele também para, em caso de erro das requests, mostrar um erro ao usuário sem impedir que ele continue usando a aplicação que já havia carregado. Adotei o uso da Suspense query com retorno de dados parciais em caso de termos já em memória cacheado algumas das coisas presentes na query. Também fiz alguns ajustes para manter a a11y dos cards.
-> 23/11 (17h): Passei as últimas horas refatorando e deixando a codebase o mais limpa possível. No caso dos componentes de UI, optei por deixar os estilos juntos aos componentes nos casos em que o componente não era tão grande. Nos casos de componentes maiores, resolvi fazer a quebra com um arquivo dedicado a estilos.
-> 23/11 (18h): Para este desafio, resolvi adotar o setup de testes com Vitest + novo browser mode. Gosto da ideia de testar em um ambiente nativo, e com playwright funcionando por de baixo dos panos a performance também não deve ser prejudicada. Essa feature acabou de ser lançada em caráter estável também.
+- [Node.js](https://nodejs.org/) (versão 18 ou superior)
+- [pnpm](https://pnpm.io/) instalado globalmente
 
-## Decisões técnicas
+### Ambiente de Desenvolvimento
 
-- Utilizar a API Suspense do React para garantir uma boa UX. Durante o primeiro carregamento, temos um spinner que preenche a tela enquanto carregam-se os dados. Após, durante o uso da paginação, utilizamos a API do useTransition para manter a tela funcional enquanto os dados não foram carregados - temos um spinner junto ao botão de paginação para indicar que novos dados estão sendo carregados e, enquanto isso, os cards da página "antiga" seguem presentes.
-- Utilizar Debounce para evitar sobrecarga de requisições e prejudicar a UX quando pesquisar personagem por nome.
-- Utilizar Map dentro da Store de favoritos para persistir cada personagem indexado a partir de seu ID. Isso torna operações de acesso, adição e deleção mais simples.
-- Salvar o timestamp do momento em que se favoritou um personagem para permitir implementações futuras de reconciliação/refetch com a API externa.
-- Pensei em converter os cards em buttons para acionar o modal de mais dados, mas a especificação do HTML não permite nested buttons. Assim, segui utilizando uma div mas fiz alguns ajustes com atributos ARIA, role e manipulando eventos de teclado. Isso é importante para manter a acessibilidade (a11y), permitindo a navegação através de teclado e oferecendo ao usuário informações do que aquele elemento faz.
-- Implementei o modal utilizando o elemento nativo do HTML Dialog. Com ele, já temos garantidos vários recursos de acessibilidade e também seguimos boas práticas de adotar um elemento apropriado existente. Para controlá-lo, temos que utilizar o useEffect para controlar sua API de abertura e fechamento (o controle através do atributo open não adiciona backdrop). Este é um dos poucos casos em que o useEffect é aceitável conforme a [documentação do React](https://react.dev/reference/react/useEffect#controlling-a-non-react-widget).
+1. **Clone o repositório:**
+   ```bash
+   git clone <url-do-repositorio>
+   cd porter-frontend-challenge
+   ```
 
-### Sobre as Ferramentas e tecnologias:
+2. **Configure as variáveis de ambiente:**
+   ```bash
+   cp .env.example .env
+   ```
 
-- React: Como essa será uma aplicação bem simples, não vejo necessidade de construir a aplicação com um framework como Tanstack / Next / etc. SSR é algo cada vez mais importante no cenário atual de performance de aplicações React, mas também existe um overhead no setup inicial que não acho que seja necessário para esse caso. Posso aprofundar esse tema posteriormente na conversa técnica. Portanto, acredito que o melhor para esse caso é criar uma SPA usando **Vite**
-- Consumo de dados: aqui pretendo implementar o diferencial técnico de usar **GraphQL**. Tenho uma certa familiaridade com o assunto mas nunca utilizei o Apollo Client - boa oportunidade para demonstrar adaptabilidade. Além disso, olhando rapidamente na documentação, a biblioteca já possui APIs necessárias para atingir certas demandas do desafio - como loading state e tratativa de erros.
-- Gerenciamento de estado: o gerenciamento de estado está principalmente ligado ao requisito funcional dos usuários favoritos. Temos 3 opções de bibliotecas, vou comentar rapidamente minha visão sobre elas.
-  - A Context API é muito boa para resolver o problema "prop drilling" no React - ou seja, compartilhar um estado que possa ser utilizado em vários pontos da aplicação. Seu setup é um pouco verboso e, mesmo sendo possível implementar lógicas mais complexas com reducers, acredito que seu valor de uso está para casos pontuais como por ex. persistir o tema do usuário - dados de natureza mais "atômico" e não tão estruturados.
-  - O Redux era a ferramenta padrão para gerenciamento de estado até algum tempo atrás. A partir de uma store global, temos um controle muito mais fino sobre o consumo e publicação de mudanças. No meu jeito de ver, possui uma API um pouco mais burocrática e não intuitiva, mesmo com o mais recente RTK. O setup inicial também é mais custoso.
-  - O Zustand se tornou rapidamente um xodó dos devs já que possui uma API bem intuitiva e uma facilidade grande no setup inicial. Quando li o desafio, já estava convencido que iria utilizar ela, principalmente considerando o aspecto tempo de implementação. Lendo rapidamente o readme deles agora, vi que já existe até uma seção documentando a persistência dos dados do estado no localStorage do navegador, outro requisito do desafio. **Zustand** é minha escolha.
-- Estilos: vou seguir a indicação do Styled Components.
+3. **Instale as dependências:**
+   ```bash
+   pnpm install
+   ```
+
+4. **Rode o servidor de desenvolvimento:**
+   ```bash
+   pnpm dev
+   ```
+   > O projeto estará disponível em `http://localhost:5173`
+
+### Rodando os Testes
+
+```bash
+pnpm test
+```
+
+### Build de Produção (Local)
+
+```bash
+pnpm build
+pnpm preview
+```
+
+### Docker
+
+Para construir e rodar a imagem Docker em produção use o `pnpm build` e então:
+
+```bash
+# Build da imagem
+docker build -t porter-frontend-challenge .
+
+# Executar o container
+docker run -p 8080:8080 porter-frontend-challenge
+```
+
+> A aplicação estará disponível em `http://localhost:8080`
+
+---
+
+## 📱 Sobre a Aplicação
+
+A aplicação consome a API GraphQL do Rick and Morty e permite:
+
+- ✅ Listagem paginada de personagens
+- ✅ Busca de personagens por nome (com debounce)
+- ✅ Sistema de favoritos com persistência em localStorage
+- ✅ Visualização detalhada de cada personagem em modal
+- ✅ Filtro para exibir apenas favoritos
+- ✅ Feedback visual com toasts
+- ✅ Suporte a internacionalização (i18n)
+- ✅ Tratamento de erros com Error Boundaries
+- ✅ Loading states e transições suaves
+
+### Estrutura do Projeto
+
+```
+porter-frontend-challenge/
+├── src/
+│   ├── types/           # Definições de tipos TypeScript
+│   ├── hooks/           # Custom hooks React
+│   ├── i18n/            # Configuração de internacionalização
+│   ├── graphql/         # Lógica de serviços e GraphQL
+│   ├── store/           # Gerenciamento de estado (Zustand)
+│   └── ui/              # Componentes React
+│       ├── components/  # Componentes reutilizáveis
+│       └── theme/       # Tema do Styled Components
+├── .env.example         # Exemplo de variáveis de ambiente
+├── Dockerfile           # Configuração Docker
+└── package.json         # Dependências e scripts
+```
+
+---
+
+## ✨ Destaques Técnicos
+
+- **Arquitetura e Setup:**
+  - Internacionalização desde o princípio (com tipagem das mensagens)
+  - Imagem Docker otimizada com build multistage (NGINX)
+  - Sistema de tema no Styled Components com cores, sombras e tipografia
+  - Configuração de ferramentas de qualidade: Biome, Husky, Commitlint
+
+- **GraphQL e TypeScript:**
+  - Apollo Client com Suspense API
+  - GraphQL Code Generator para tipagem automática dos recursos da API
+  - TypeScript estrito em todo o projeto
+
+- **Performance e UX:**
+  - Suspense API do React para loading states
+  - Transition API para manter UI responsiva durante carregamentos
+  - Debounce na busca por nome (protege a API e melhora UX)
+
+- **Hooks Customizados:**
+  - `useFavoriteCharacter`: abstrai lógica de favoritos com seletor otimizado que previne re-renders desnecessários
+  - Reutilização de código e melhor separação de responsabilidades
+
+- **Componentização:**
+  - Separação clara entre camada de apresentação e camada de dados para renderização dos cards
+  - Modal decomposto em subcomponentes com responsabilidades claras
+  - Renderização condicional baseada em filtros sem repetição de código
+
+- **Acessibilidade (a11y):**
+  - Cards navegáveis por teclado com atributos ARIA apropriados
+  - Modal usando elemento nativo `<dialog>` do HTML
+  - Manipulação de eventos de teclado para interações
+
+- **Qualidade e Testes:**
+  - Error Boundaries para casos de erro de rede/requisição
+  - Feedback ao usuário via toast (adição/remoção de favoritos)
+  - Testes implementados com Vitest Browser Mode (ambiente nativo)
+
+---
+
+## 🔧 Decisões Técnicas e Ferramentas
+
+### Arquitetura e Framework
+
+**React com Vite (SPA)**
+
+Como essa é uma aplicação relativamente simples, não vi necessidade de construir com um framework full-stack como Next.js ou TanStack Start. SSR é algo cada vez mais importante no cenário atual de performance de aplicações React, mas também existe um overhead no setup inicial que não julguei necessário para esse caso. Optei por criar uma SPA usando **Vite** pela experiência de desenvolvimento superior e build otimizado.
+
+### Consumo de Dados
+
+**GraphQL com Apollo Client**
+
+Implementei o diferencial técnico de usar **GraphQL**. Tenho familiaridade com o assunto mas nunca havia utilizado o Apollo Client — foi uma boa oportunidade para demonstrar adaptabilidade. Além disso, a biblioteca já possui APIs necessárias para atingir certas demandas do desafio, como loading states e tratativa de erros.
+
+**GraphQL Code Generator**
+
+Descobri durante a pesquisa que posso gerar automaticamente os tipos TypeScript a partir do schema GraphQL da API. Isso melhora significativamente a DX e garante type-safety em todas as queries.
+
+### Gerenciamento de Estado
+
+**Zustand com persistência**
+
+O gerenciamento de estado está principalmente ligado ao requisito funcional dos favoritos. Avaliei 3 opções:
+
+- **Context API**: Muito boa para resolver "prop drilling", mas com setup verboso. Melhor para dados mais "atômicos" como tema do usuário.
+
+- **Redux**: Era a ferramenta padrão no desenvolvimento de frontend, oferece controle fino sobre o estado com Pub/Sub, mas possui API mais burocrática (mesmo com RTK) e setup custoso.
+
+- **Zustand**: API intuitiva, setup simples, e já possui documentação para persistência no localStorage — perfeito para o caso de uso. Foi minha escolha.
+
+**Por que Map para armazenar favoritos?**
+
+Utilizei `Map` dentro da store de favoritos para indexar cada personagem pelo ID. Isso torna operações de acesso, adição e deleção em tese O(1), muito mais eficientes que arrays. Também salvo o timestamp do momento em que se favoritou para permitir implementações futuras de reconciliação/refetch.
+
+### Estilização
+
+**Styled Components**
+
+Segui a indicação do desafio. Implementei um tema base com cores, sombras e tipografia que é consumido por todos os componentes.
+
+### Testes
+
+**Vitest Browser Mode + Playwright**
+
+Apesar dos requisitos indicarem RTL/Jest, implementei usando Vitest Browser Mode. A API de asserções é bem parecida com RTL (o time se inspirou nele), mas oferece ambiente nativo de navegador ao invés de JSDOM. Isso elimina bugs relacionados ao ambiente simulado e a performance com Playwright é excelente. Fiz essa escolha por querer usar algo mais moderno, e o setup foi muito mais rápido.
+
+### Decisões de UX e Performance
+
+**Suspense API**
+
+Utilizo a Suspense API do React para garantir uma boa UX:
+- No primeiro carregamento: spinner em tela cheia
+- Durante paginação: uso da `useTransition` para manter a tela funcional enquanto carrega, com spinner no botão de paginação e cards antigos visíveis
+
+**Debounce na busca**
+
+Implementei debounce de 500ms na busca por nome para evitar sobrecarga de requisições e melhorar a experiência do usuário.
+
+**Error Boundaries**
+
+Componentes que fazem queries Apollo estão envoltos em Error Boundaries. Em caso de erro de rede, mostra mensagem ao usuário sem quebrar a aplicação já carregada.
+
+### Decisões de Acessibilidade
+
+**Cards com role e eventos de teclado**
+
+Pensei em converter os cards em `<button>` para acionar o modal, mas a especificação HTML não permite buttons aninhados. Mantive como `<div>` mas adicionei atributos ARIA, role, e manipulação de eventos de teclado para navegação acessível.
+
+**Modal com elemento `<dialog>`**
+
+Implementei usando o elemento nativo HTML `<dialog>`, que já garante vários recursos de acessibilidade. Para controlá-lo, uso `useEffect` para chamar os métodos nativos `.showModal()` e `.close()` (controle via atributo `open` não adiciona backdrop). Este é um dos [poucos casos aceitáveis de useEffect](https://react.dev/reference/react/useEffect#controlling-a-non-react-widget) segundo a documentação React.
+
+### Internacionalização
+
+**react-i18next**
+
+Configurei i18n desde o início com tipagem das mensagens, facilitando manutenção e expansão futura para outros idiomas.
+
+### Containerização
+
+**Docker com multistage build**
+
+Adotei boas práticas com processo multistage:
+1. Stage de build: instala dependências + compila aplicação
+2. Stage de produção: serve arquivos estáticos via NGINX
+
+Isso resulta em imagem final leve e otimizada.
+
+---
+
+## 💾 Funcionamento da Persistência de Favoritos
+
+Como o documento do desafio pede uma explicação sobre esse assunto, vou adicionar uma seção dedicada.
+
+A persistência no localStorage só pode ser feita utilizando strings. Isso coloca a necessidade de serializar/desserializar nosso estado. Geralmente, temos isso facilitado pelos métodos nativos do JS para transformar em JSON - formato utilizado em larga escala para comunicação entre cliente e servidor na web.
+
+Com isso, torna-se uma questão de entender a API específica da biblioteca que estamos utilizando (Zustand) e ver se precisamos fazer alguma adequação especial considerando nossa estrutura de dados.
+
+Para este projeto, resolvi adotar `Map` (decisão explicada acima) para armazenar favoritos. Isso significa que temos que dar um passo adicional além de utilizar a API do Zustand para persistência.
+
+`Map` não é um "objeto" comum ao JSON, ele é do domínio do JavaScript. Por isso, precisamos transformá-lo em um Array - uma "dimensão" compartilhada por ambas as especificações.
+
+### Serialização (Map → JSON)
+
+Como no JS podemos construir Arrays a partir de qualquer objeto iterável com `Array.from`, basta pegarmos nosso iterável do Map - utilizando o método `.entries()` - e fazer a conversão.
+
+### Desserialização (JSON → Map)
+
+O caminho de "volta" é mais fácil ainda - utilizamos o construtor do Map com o Array formado após o parsing do JSON.
+
+A API de persistência do Zustand permite configurar essas transformações customizadas, garantindo que o Map seja corretamente persistido e restaurado.
+
+---
+
+## 📚 Processo de Desenvolvimento
+
+Para detalhes sobre o processo de desenvolvimento, primeiras impressões, reflexões pós-implementação e diário detalhado das atividades, consulte o [DEVELOPMENT.md](./DEVELOPMENT.md).
+
+---
+
+## 🛠️ Scripts Disponíveis
+
+```bash
+pnpm dev        # Inicia servidor de desenvolvimento
+pnpm build      # Build de produção
+pnpm preview    # Preview do build de produção
+pnpm test       # Executa testes
+pnpm codegen    # Gera tipos TypeScript do schema GraphQL
+pnpm lint       # Executa linter (Biome)
+pnpm format     # Formata código (Biome)
+pnpm check      # Executa lint + format
+```
+
+---
